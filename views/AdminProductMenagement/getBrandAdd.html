@@ -1,0 +1,25 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Brendovi - Dodavanje novog
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/brands">Prikazi sve brendove</a>
+    </div>
+    <br />
+    
+    <form method="POST">
+        <div>
+            <label for="name">Naziv brenda:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div>
+            <button type="submit">Dodaj brend</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

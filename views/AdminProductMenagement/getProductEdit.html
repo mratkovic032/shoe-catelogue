@@ -1,0 +1,71 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Proizvodi - Izmena
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/products/stock/{{ product.product_id }}">Vrati se nazad</a>
+    </div>
+    <br />
+    
+    <form method="POST">
+        <input type="number" id="product_version_id" name="product_version_id" value="{{ product.product_version_id }}" hidden>
+        <div>
+            <label for="category">Kategorija:</label>
+            <select name="category" id="category">
+                <option value="{{ product.category_id }}">{{ product.category|escape }}</option>
+                {% for category in categories %}
+                    <option value="{{ category.category_id }}">{{ category.name|escape }}</option>
+                {% endfor %}
+            </select>            
+        </div>
+
+        <div>
+            <label for="brand">Brend:</label>
+            <select name="brand" id="brand">
+                <option value="{{ product.brand_id }}">{{ product.brand|escape }}</option>
+                {% for brand in brands %}
+                    <option value="{{ brand.brand_id }}">{{ brand.name|escape }}</option>
+                {% endfor %}
+            </select> 
+        </div>
+
+        <div>
+            <label for="title">Model:</label>
+            <input type="text" id="title" name="title" value="{{ product.title|escape }}">
+        </div>
+
+        <div>
+            <label for="description">Opsi:</label>
+            <textarea rows="4" cols="30" id="description" name="description">{{ product.description|escape }}</textarea>
+        </div>
+
+        <div>
+            <label for="material">Materijal:</label>
+            <input type="text" id="material" name="material" value="{{ product.material|escape }}">
+        </div> 
+
+        <div>
+            <label for="price">Cena:</label>
+            <input type="number" id="price" name="price" value="{{ product.price }}">
+        </div>               
+
+        <div>
+            <label for="admin">Admin:</label>
+            <select name="admin" id="admin">
+                <option value="{{ product.admin_id }}">{{ product.admin|escape }}</option>
+                {% for admin in admins %}
+                    <option value="{{ admin.admin_id }}">{{ admin.username|escape }}</option>
+                {% endfor %}
+            </select> 
+        </div>
+
+        <div>
+            <button type="submit">Izmeni proizvod</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

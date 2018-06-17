@@ -1,0 +1,16 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Velicine - Poruka
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/sizes">Prikazi sve velicine</a>
+    </div>
+    <br />
+    
+    <p>{{ message|escape }}</p>
+</div>
+{% endblock %}

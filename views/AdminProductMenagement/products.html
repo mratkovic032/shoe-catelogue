@@ -1,0 +1,46 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Proizvodi
+{% endblock %}
+
+{% block main %}
+<div>
+    <h2>Proizvodi</h2>
+    <div class="options">
+        <a href="{{ BASE }}admin/products/add">Dodaj novi proizvod</a>
+    </div>
+    <br />
+    <div class="products table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Kategorija</th>
+                    <th>Brend</th>
+                    <th>Model</th>                    
+                    <th>Opis</th>
+                    <th>Materijal</th>                                    
+                    <th>Cena</th>
+                    <th>Uneo</th>
+                    <th>Opcija</th>                    
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for product in productsWithBrandAndCategory %}
+                <tr>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.brand|escape }}</td>
+                    <td>{{ product.title|escape }}</td>                    
+                    <td>{{ product.description|escape }}</td> 
+                    <td>{{ product.material|escape }}</td>                                       
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.admin }}</td>
+                    <td><a href="{{ BASE }}admin/products/stock/{{ product.product_id }}">Stanje</a> / <a href="{{ BASE }}admin/products/edit/{{ product.product_id }}">Izmeni</a></td>
+                </tr>
+                {% endfor %}                
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

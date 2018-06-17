@@ -1,0 +1,70 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Proizvodi - Dodavanje novog
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/products">Prikazi sve proizvode</a>
+    </div>
+    <br />
+    
+    <form method="POST">
+        <div>
+            <label for="category">Kategorija:</label>
+            <select name="category" id="category">
+                <option>- - -</option>
+                {% for category in categories %}
+                    <option value="{{ category.category_id }}">{{ category.name|escape }}</option>
+                {% endfor %}
+            </select>            
+        </div> 
+
+        <div>
+            <label for="brand">Brend:</label>
+            <select name="brand" id="brand">
+                <option>- - -</option>
+                {% for brand in brands %}
+                    <option value="{{ brand.brand_id }}">{{ brand.name|escape }}</option>
+                {% endfor %}
+            </select> 
+        </div>
+
+        <div>
+            <label for="title">Model:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+
+        <div>
+            <label for="description">Opis:</label>            
+            <textarea rows="4" cols="30" id="description" name="description"></textarea required>
+        </div>
+
+        <div>
+            <label for="price">Cena:</label>
+            <input type="number" id="price" name="price" required>
+        </div>
+
+        <div>
+            <label for="material">Materijal:</label>
+            <input type="text" id="material" name="material" required>
+        </div>               
+
+        <div>
+            <label for="admin">Admin:</label>
+            <select name="admin" id="admin">
+                <option>- - -</option>
+                {% for admin in admins %}
+                    <option value="{{ admin.admin_id }}">{{ admin.username|escape }}</option>
+                {% endfor %}
+            </select> 
+        </div>
+
+        <div>
+            <button type="submit">Dodaj proizvod</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

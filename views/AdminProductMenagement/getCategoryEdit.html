@@ -1,0 +1,26 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Kategorije - Izmena
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/categories/add">Dodaj novu kategoriju</a><br />
+        <a href="{{ BASE }}admin/categories">Prikazi sve kategorije</a>
+    </div>
+    <br />
+    
+    <form method="POST">
+        <div>
+            <label for="name">Naziv kategorije:</label>
+            <input type="text" id="name" name="name" value="{{ category.name }}">
+        </div>
+        
+        <div>
+            <button type="submit">Izmeni kategoriju</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

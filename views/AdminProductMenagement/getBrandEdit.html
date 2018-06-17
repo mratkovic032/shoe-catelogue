@@ -1,0 +1,26 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Brendovi - Izmena
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/brands/add">Dodaj nov brend</a><br />
+        <a href="{{ BASE }}admin/brands">Prikazi sve brendove</a>
+    </div>
+    <br />
+    
+    <form method="POST">
+        <div>
+            <label for="name">Naziv brenda:</label>
+            <input type="text" id="name" name="name" value="{{ brand.name }}">
+        </div>
+        
+        <div>
+            <button type="submit">Izmeni brend</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

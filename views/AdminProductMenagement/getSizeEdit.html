@@ -1,0 +1,26 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Velicine - Izmena
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/sizes/add">Dodaj novu velicinu</a><br />
+        <a href="{{ BASE }}admin/sizes">Prikazi sve velicine</a>
+    </div>
+    <br />
+    
+    <form method="POST">
+        <div>
+            <label for="size">Velicina:</label>
+            <input type="text" id="size" name="size" value="{{ size.value }}">
+        </div>
+        
+        <div>
+            <button type="submit">Izmeni velicinu</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

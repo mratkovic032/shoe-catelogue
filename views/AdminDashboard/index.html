@@ -1,0 +1,33 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block main %}
+{% spaceless %}
+<h2>Dashboard</h2>
+<div>
+    <ul>        
+        <li>
+            <a href="{{ BASE }}admin/categories">Kategorije</a>
+        </li>
+        <li>
+            <a href="{{ BASE }}admin/brands">Brendovi</a>
+        </li>
+        <li>
+            <a href="{{ BASE }}admin/products">Proizvodi</a>
+        </li>
+        <li>
+            <a href="{{ BASE }}admin/colors">Boje</a>
+        </li>
+        <li>
+            <a href="{{ BASE }}admin/sizes">Velicine</a>
+        </li>
+        <li>
+            <a href="{{ BASE }}admin/admins">Admini</a>
+        </li>
+    </ul>
+</div>
+{% endspaceless %}
+{% endblock %}

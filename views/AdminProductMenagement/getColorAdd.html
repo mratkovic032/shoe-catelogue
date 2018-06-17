@@ -1,0 +1,25 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Boje - Dodavanje nove
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/colors">Prikazi sve boje</a>
+    </div>
+    <br />
+    
+    <form method="POST">
+        <div>
+            <label for="name">Naziv boje:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div>
+            <button type="submit">Dodaj boju</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

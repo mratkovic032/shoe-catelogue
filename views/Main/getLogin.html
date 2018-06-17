@@ -1,0 +1,17 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+<form action="{{ BASE }}admin/login" method="POST">
+    <div>
+        <label for="input_username">Korisnicko ime:</label>
+        <input type="text" id="input_username" name="login_username" required placeholder="unesite svoje korisnicko ime">
+    </div>
+    <div>
+        <label for="input_password">Lozinka:</label>
+        <input type="password" id="input_password" name="login_password" required placeholder="unesite svoju lozinku">
+    </div>
+    <div>
+        <button type="submit">Uloguj se</button>
+    </div>
+</form>
+{% endblock %}

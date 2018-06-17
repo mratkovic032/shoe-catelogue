@@ -1,0 +1,36 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Velicine
+{% endblock %}
+
+{% block main %}
+<div>
+    <h2>Velicine</h2>
+    <div class="options">
+        <a href="{{ BASE }}admin/sizes/add">Dodaj novu velicinu</a>
+    </div>
+    <br />
+    <div class="sizes table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Velicina</th>
+                    <th>Opcija</th>                
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for size in sizes %}
+                <tr>
+                    <td>{{ size.size_id }}</td>
+                    <td>{{ size.value }}</td>
+                    <td><a href="{{ BASE }}admin/sizes/edit/{{ size.size_id }}">Izmeni</a></td>
+                </tr>
+                {% endfor %}                
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

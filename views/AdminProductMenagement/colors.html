@@ -1,0 +1,36 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Boje
+{% endblock %}
+
+{% block main %}
+<div>
+    <h2>Boje</h2>
+    <div class="options">
+        <a href="{{ BASE }}admin/colors/add">Dodaj novu boju</a>
+    </div>
+    <br />
+    <div class="colors table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Boja</th>
+                    <th>Opcija</th>                
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for color in colors %}
+                <tr>
+                    <td>{{ color.color_id }}</td>
+                    <td>{{ color.name }}</td>
+                    <td><a href="{{ BASE }}admin/colors/edit/{{ color.color_id }}">Izmeni</a></td>
+                </tr>
+                {% endfor %}                
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

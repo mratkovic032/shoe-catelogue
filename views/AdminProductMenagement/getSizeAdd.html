@@ -1,0 +1,25 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Velicine - Dodavanje nove
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/sizes">Prikazi sve velicine</a>
+    </div>
+    <br />
+    
+    <form method="POST">
+        <div>
+            <label for="size">Velicine:</label>
+            <input type="number" id="size" name="size" required>
+        </div>
+        
+        <div>
+            <button type="submit">Dodaj velicinu</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Proizvodi - Stanje - Poruka
+endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/products">Prikazi sve proizvode</a>
+    </div>
+    <br />
+    
+    <p>{{ message|escape }}</p>
+</div>
+{% endblock %}

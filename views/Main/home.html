@@ -1,0 +1,18 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+{% spaceless %}
+<!-- <p>{{ sessionData }}</p> -->
+<nav>
+    <ul>
+    {% for category in categories %}
+        <li>
+            <a href="{{ BASE }}category/{{ category.category_id }}">                
+                {{ category.name|escape }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+</nav>
+{% endspaceless %}
+{% endblock %}

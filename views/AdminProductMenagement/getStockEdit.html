@@ -1,0 +1,95 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Proizvodi - Stanje - Izmena
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/products/stock/{{ productVersion.product_id }}">Vrati se nazad</a>
+    </div>
+    <br />
+    
+    <form method="POST">
+        <input type="number" id="product_id" name="product_id" value="{{ productVersion.product_id }}" hidden>
+        
+        <div>
+            <label for="color">Boja:</label>
+            <select name="color" id="color">
+                <option value="{{ productVersion.color_id }}">{{ productVersion.color|escape }}</option>
+                {% for color in colors %}
+                    <option value="{{ color.color_id }}">{{ color.name|escape }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" data-toggle="modal" data-target="#colorModal">
+                Dodaj novu boju
+            </button>            
+        </div>
+
+        <div>
+            <label for="size">Velicina:</label>
+            <select name="size" id="size">
+                <option value="{{ productVersion.size_id }}">{{ productVersion.size|escape }}</option>
+                {% for size in sizes %}
+                    <option value="{{ size.size_id }}">{{ size.value|escape }}</option>
+                {% endfor %}
+            </select>             
+            <button type="button" data-toggle="modal" data-target="#sizeModal">
+                Dodaj novu velicinu
+            </button> 
+        </div>
+
+        <div>
+            <label for="quantity">Kolicina:</label>
+            <input type="number" id="quantity" name="quantity" value="{{ productVersion.quantity }}">
+        </div> 
+
+        <div>
+            <button type="submit">Izmeni proizvod</button>
+        </div>
+    </form>        
+
+    <div class="modal fade" id="colorModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Dodavanje nove boje</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="new_color">Unesite novu boju</label>
+                    <input class="form-control" type="text" id="new_color" name="new_color">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addColor();">Dodaj boju</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="sizeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Dodavanje nove velicine</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="new_size">Unesite novu velicinu:</label>
+                    <input class="form-control" type="number" id="new_size" name="new_size">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addSize();">Dodaj velicinu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

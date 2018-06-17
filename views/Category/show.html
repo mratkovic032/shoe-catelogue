@@ -1,0 +1,18 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+    <h1>{{ category.name|escape }}</h1>
+    <p>Spisak proizvoda u ovoj kategoriji je:</p>
+    {% for product in productsInCategory %}
+        <ul>
+            <li>
+            <a href="{{ BASE }}product/{{ product.product_id }}">
+                {{ product.title|escape }}              
+            </a>
+        </ul>    
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+{{ category.name|escape }}
+{% endblock %}

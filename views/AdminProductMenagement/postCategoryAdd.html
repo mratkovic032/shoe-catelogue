@@ -1,0 +1,16 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Kategorije - Poruka
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/categories">Prikazi sve kategorije</a>
+    </div>
+    <br />
+    
+    <p>{{ message|escape }}</p>
+</div>
+{% endblock %}
