@@ -71,5 +71,8 @@
             App\Core\Route::get('|^api/size/?$|',                       'ApiSize',                  'getSizes'),
             App\Core\Route::get('|^api/size/add/([0-9]+)/?$|',          'ApiSize',                  'addSize'),
 
+        # Search:
+        App\Core\Route::post('|^search/?$|',                             'Search',                  'quickSearch'),
+
         App\Core\Route::any('|^.*$|',                               'Main',                         'home')
     ];

@@ -27,6 +27,23 @@
             return $this->getAllByFieldName('category_id', $categoryId);            
         }
 
+        public function getAllBySearch(string $keywords) {
+            $sql = 'SELECT * FROM product WHERE product.title LIKE ? OR product.description LIKE ?;';
+
+            $keywords = '%' . $keywords . '%';
+
+            $prep = $this->getConnection()->prepare($sql);
+            if (!$prep) {
+                return [];
+            }
+            $res = $prep->execute([ $keywords, $keywords ]);
+            if (!$res) {
+                return [];
+            }
+
+            return $prep->fetchAll(\PDO::FETCH_OBJ);
+        }
+
         public function showWholeProducts(): array {
             $sql = 'SELECT product.*, brand.name AS "brand", category.name AS "category", product_version.product_id, product_version.quantity, size.value AS "size", size.size_id, color.name AS "color", color.color_id, admin.username AS "admin" FROM 
                     (((product INNER JOIN brand ON product.brand_id = brand.brand_id) INNER JOIN category ON product.category_id = category.category_id) INNER JOIN admin ON product.admin_id = admin.admin_id) INNER JOIN 

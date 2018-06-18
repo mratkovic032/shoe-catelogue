@@ -2,7 +2,7 @@
 
 {% block main %}
     <a href="#" onclick="addBookmark({{ product.product_id }});">Dodaj u bookmark</a>
-    <h1>{{ product.title|escape }}</h1>
+    <h2>{{ product.title|escape }}</h2>
     <p>{{ product.description|escape }}</p>    
     <p>Cena: {{ product.price }} din.</p>    
     <p>Materijal: {{ product.material|escape }}</p>
