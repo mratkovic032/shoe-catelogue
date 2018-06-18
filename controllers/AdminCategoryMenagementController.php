@@ -1,0 +1,61 @@
+<?php
+    namespace App\Controllers;
+
+    use App\Core\Role\AdminRoleController;
+    use App\Models\ProductModel;
+    use App\Models\CategoryModel;
+    use App\Models\BrandModel;
+    use App\Models\ColorModel;
+    use App\Models\SizeModel;
+    use App\Models\AdminModel;
+    use App\Models\ProductVersionModel;
+
+    class AdminCategoryMenagementController extends AdminRoleController {     
+        public function categories() {
+            $categoryModel = new CategoryModel($this->getDatabaseConnection());
+            $categories = $categoryModel->getAll();            
+            $this->set('categories', $categories);
+        }    
+
+        public function getCategoryEdit($categoryId) {
+            $categoryModel = new CategoryModel($this->getDatabaseConnection());
+            $category = $categoryModel->getById($categoryId);
+            if (!$category) {
+                $this->redirect(\Configuration::BASE . 'admin/categories');
+            }
+
+            $this->set('category', $category);
+            return $categoryModel;
+        }
+
+        public function postCategoryEdit($categoryId) {
+            $categoryModel = $this->getCategoryEdit($categoryId);
+
+            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+
+            $categoryModel->editById($categoryId, [
+                'name' => $name
+            ]);
+
+            $this->redirect(\Configuration::BASE . 'admin/categories');
+        }
+
+        public function getCategoryAdd() {
+
+        }
+
+        public function postCategoryAdd() {
+            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+
+            $categoryModel = new CategoryModel($this->getDatabaseConnection());
+            $categoryId = $categoryModel->add([ 
+                'name' => $name
+            ]);
+
+            if ($categoryId) {
+                $this->redirect(\Configuration::BASE . 'admin/categories');
+            }
+
+            $this->set('message', 'Nije uspesno dodata kategorija');
+        }        
+    }

@@ -50,16 +50,6 @@ Dashboard - Proizvodi - Dodavanje novog
         <div>
             <label for="material">Materijal:</label>
             <input type="text" id="material" name="material" required>
-        </div>               
-
-        <div>
-            <label for="admin">Admin:</label>
-            <select name="admin" id="admin">
-                <option>- - -</option>
-                {% for admin in admins %}
-                    <option value="{{ admin.admin_id }}">{{ admin.username|escape }}</option>
-                {% endfor %}
-            </select> 
         </div>
 
         <div>

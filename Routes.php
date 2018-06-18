@@ -1,8 +1,8 @@
 <?php
     return [
         # Admin login/register routes:
-        App\Core\Route::get('|^admin/register/?$|',                 'Main',                         'getRegister'),
-        App\Core\Route::post('|^admin/register/?$|',                'Main',                         'postRegister'),
+        # App\Core\Route::get('|^admin/register/?$|',                 'Main',                         'getRegister'),
+        # App\Core\Route::post('|^admin/register/?$|',                'Main',                         'postRegister'),
         App\Core\Route::get('|^admin/login/?$|',                    'Main',                         'getLogin'),
         App\Core\Route::post('|^admin/login/?$|',                   'Main',                         'postLogin'),        
 
@@ -11,14 +11,10 @@
         App\Core\Route::get('|^product/([0-9]+/?)$|',               'Product',                      'show'),        
 
         # Admin role routes:
-            App\Core\Route::get('|^admin/dashboard/?$|',                'AdminDashboard',               'index'),
-            App\Core\Route::get('|^admin/categories/?$|',               'AdminProductMenagement',       'categories'),
-            App\Core\Route::get('|^admin/brands/?$|',                   'AdminProductMenagement',       'brands'),        
-            App\Core\Route::get('|^admin/products/?$|',                 'AdminProductMenagement',       'products'),
-            App\Core\Route::get('|^admin/colors/?$|',                   'AdminProductMenagement',       'colors'),
-            App\Core\Route::get('|^admin/sizes/?$|',                    'AdminProductMenagement',       'sizes'),
+            App\Core\Route::get('|^admin/dashboard/?$|',                        'AdminDashboard',               'index'),                                          
 
             # Products        
+            App\Core\Route::get('|^admin/products/?$|',                         'AdminProductMenagement',       'products'),
             App\Core\Route::get('|^admin/products/edit/([0-9]+)/?$|',           'AdminProductMenagement',       'getProductEdit'),
             App\Core\Route::post('|^admin/products/edit/([0-9]+)/?$|',          'AdminProductMenagement',       'postProductEdit'),
             App\Core\Route::get('|^admin/products/add/?$|',                     'AdminProductMenagement',       'getProductAdd'),
@@ -32,28 +28,32 @@
             App\Core\Route::post('|^admin/products/stock/edit/([0-9]+)/?$|',    'AdminProductMenagement',       'postStockEdit'),
 
             # Categories
-            App\Core\Route::get('|^admin/categories/edit/([0-9]+)/?$|',   'AdminProductMenagement',       'getCategoryEdit'),
-            App\Core\Route::post('|^admin/categories/edit/([0-9]+)/?$|',  'AdminProductMenagement',       'postCategoryEdit'),
-            App\Core\Route::get('|^admin/categories/add/?$|',             'AdminProductMenagement',       'getCategoryAdd'),
-            App\Core\Route::post('|^admin/categories/add/?$|',            'AdminProductMenagement',       'postCategoryAdd'),
+            App\Core\Route::get('|^admin/categories/?$|',                       'AdminCategoryMenagement',       'categories'),
+            App\Core\Route::get('|^admin/categories/edit/([0-9]+)/?$|',         'AdminCategoryMenagement',       'getCategoryEdit'),
+            App\Core\Route::post('|^admin/categories/edit/([0-9]+)/?$|',        'AdminCategoryMenagement',       'postCategoryEdit'),
+            App\Core\Route::get('|^admin/categories/add/?$|',                   'AdminCategoryMenagement',       'getCategoryAdd'),
+            App\Core\Route::post('|^admin/categories/add/?$|',                  'AdminCategoryMenagement',       'postCategoryAdd'),
 
             # Brands
-            App\Core\Route::get('|^admin/brands/edit/([0-9]+)/?$|',   'AdminProductMenagement',       'getBrandEdit'),
-            App\Core\Route::post('|^admin/brands/edit/([0-9]+)/?$|',  'AdminProductMenagement',       'postBrandEdit'),
-            App\Core\Route::get('|^admin/brands/add/?$|',             'AdminProductMenagement',       'getBrandAdd'),
-            App\Core\Route::post('|^admin/brands/add/?$|',            'AdminProductMenagement',       'postBrandAdd'),
+            App\Core\Route::get('|^admin/brands/?$|',                           'AdminBrandMenagement',       'brands'),  
+            App\Core\Route::get('|^admin/brands/edit/([0-9]+)/?$|',             'AdminBrandMenagement',       'getBrandEdit'),
+            App\Core\Route::post('|^admin/brands/edit/([0-9]+)/?$|',            'AdminBrandMenagement',       'postBrandEdit'),
+            App\Core\Route::get('|^admin/brands/add/?$|',                       'AdminBrandMenagement',       'getBrandAdd'),
+            App\Core\Route::post('|^admin/brands/add/?$|',                      'AdminBrandMenagement',       'postBrandAdd'),
 
             # Colors
-            App\Core\Route::get('|^admin/colors/edit/([0-9]+)/?$|',   'AdminProductMenagement',       'getColorEdit'),
-            App\Core\Route::post('|^admin/colors/edit/([0-9]+)/?$|',  'AdminProductMenagement',       'postColorEdit'),
-            App\Core\Route::get('|^admin/colors/add/?$|',             'AdminProductMenagement',       'getColorAdd'),
-            App\Core\Route::post('|^admin/colors/add/?$|',            'AdminProductMenagement',       'postColorAdd'),
+            App\Core\Route::get('|^admin/colors/?$|',                           'AdminColorMenagement',       'colors'),
+            App\Core\Route::get('|^admin/colors/edit/([0-9]+)/?$|',             'AdminColorMenagement',       'getColorEdit'),
+            App\Core\Route::post('|^admin/colors/edit/([0-9]+)/?$|',            'AdminColorMenagement',       'postColorEdit'),
+            App\Core\Route::get('|^admin/colors/add/?$|',                       'AdminColorMenagement',       'getColorAdd'),
+            App\Core\Route::post('|^admin/colors/add/?$|',                      'AdminColorMenagement',       'postColorAdd'),
 
             # Sizes
-            App\Core\Route::get('|^admin/sizes/edit/([0-9]+)/?$|',   'AdminProductMenagement',       'getSizeEdit'),
-            App\Core\Route::post('|^admin/sizes/edit/([0-9]+)/?$|',  'AdminProductMenagement',       'postSizeEdit'),
-            App\Core\Route::get('|^admin/sizes/add/?$|',             'AdminProductMenagement',       'getSizeAdd'),
-            App\Core\Route::post('|^admin/sizes/add/?$|',            'AdminProductMenagement',       'postSizeAdd'),
+            App\Core\Route::get('|^admin/sizes/?$|',                            'AdminSizeMenagement',       'sizes'),
+            App\Core\Route::get('|^admin/sizes/edit/([0-9]+)/?$|',              'AdminSizeMenagement',       'getSizeEdit'),
+            App\Core\Route::post('|^admin/sizes/edit/([0-9]+)/?$|',             'AdminSizeMenagement',       'postSizeEdit'),
+            App\Core\Route::get('|^admin/sizes/add/?$|',                        'AdminSizeMenagement',       'getSizeAdd'),
+            App\Core\Route::post('|^admin/sizes/add/?$|',                       'AdminSizeMenagement',       'postSizeAdd'),
 
         # API routes:
 
