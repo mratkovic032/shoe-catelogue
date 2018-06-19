@@ -7,10 +7,10 @@ Dashboard - Proizvodi - Stanje - Dodavanje novog
 {% block main %}
 <div>
     <div class="options">
-        <a href="{{ BASE }}admin/products/stock/{{ product.product_id }}">Vrati se nazad</a><br />
+        <a href="{{ BASE }}admin/products/stock/{{ brandTitle.product_id }}">Vrati se nazad</a><br />
     </div>
     <br />
-    <h3>{{ product.brand }} - {{ product.title }}</h3>
+    <h2>{{ brandTitle.name }} - {{ brandTitle.title }}</h2>
     
     <form method="POST">    
         <input type="number" id="product_id" name="product_id" value="{{ id}}" hidden>

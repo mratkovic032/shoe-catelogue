@@ -23,8 +23,15 @@
             ];
         }
         
-        public function getAllByCategoryId(int $categoryId): array {
-            return $this->getAllByFieldName('category_id', $categoryId);            
+        public function getAllByCategoryIdAndBrandId(int $categoryId, int $brandId): array {
+            $sql = 'SELECT product.* FROM product WHERE product.category_id = ? AND product.brand_id = ?;';
+            $prep = $this->getConnection()->prepare($sql);            
+            $res = $prep->execute([ $categoryId, $brandId ]);
+            $products = [];
+            if ($res) {
+                $products = $prep->fetchAll(\PDO::FETCH_OBJ);
+            }
+            return $products;           
         }
 
         public function getAllBySearch(string $keywords) {
@@ -42,19 +49,6 @@
             }
 
             return $prep->fetchAll(\PDO::FETCH_OBJ);
-        }
-
-        public function showWholeProducts(): array {
-            $sql = 'SELECT product.*, brand.name AS "brand", category.name AS "category", product_version.product_id, product_version.quantity, size.value AS "size", size.size_id, color.name AS "color", color.color_id, admin.username AS "admin" FROM 
-                    (((product INNER JOIN brand ON product.brand_id = brand.brand_id) INNER JOIN category ON product.category_id = category.category_id) INNER JOIN admin ON product.admin_id = admin.admin_id) INNER JOIN 
-                    ((product_version INNER JOIN color ON product_version.color_id = color.color_id) INNER JOIN size ON product_version.size_id = size.size_id) ON product.product_id = product_version.product_id;';
-            $prep = $this->getConnection()->prepare($sql);            
-            $res = $prep->execute();
-            $wholeProducts = [];
-            if ($res) {
-                $wholeProducts = $prep->fetchAll(\PDO::FETCH_OBJ);
-            }            
-            return $wholeProducts;
         }
 
         public function showWholeProduct(int $productId) {

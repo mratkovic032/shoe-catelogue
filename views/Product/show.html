@@ -7,14 +7,19 @@
     <p>Cena: {{ product.price }} din.</p>    
     <p>Materijal: {{ product.material|escape }}</p>
     <p>Raspolozive velicine i boje:</p>
-    {% for stockProduct in productsInStock %}
-        <ul>
-            <li>
-                Velicina: {{ stockProduct.size }}<br />
-                Boja: {{ stockProduct.color }}<br />
-                Na stanju: {{ stockProduct.quantity }}            
-        </ul>
-    {% endfor %}
+    {% if productsInStock is empty %}
+        <br />
+        <p>Nema na stanju</p>
+    {% else %}
+        {% for stockProduct in productsInStock %}
+            <ul>
+                <li>
+                    Velicina: {{ stockProduct.size }}<br />
+                    Boja: {{ stockProduct.color }}<br />
+                    Na stanju: {{ stockProduct.quantity }}            
+            </ul>
+        {% endfor %}
+    {% endif %}    
 {% endblock %}
 
 {% block title %}

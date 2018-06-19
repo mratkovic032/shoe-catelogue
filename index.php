@@ -43,6 +43,7 @@
     $controller->setSession($session);
     $controller->getSession()->reload();
     $controller->__pre();
+    $controller->getSessionAdminId();
 
     call_user_func_array([$controller, $route->getMethodName()], $arguments);
     $controller->getSession()->save();

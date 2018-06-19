@@ -16,10 +16,9 @@ Dashboard - Proizvodi - Stanje - Izmena
         
         <div>
             <label for="color">Boja:</label>
-            <select name="color" id="color">
-                <option value="{{ productVersion.color_id }}">{{ productVersion.color|escape }}</option>
+            <select name="color" id="color">                
                 {% for color in colors %}
-                    <option value="{{ color.color_id }}">{{ color.name|escape }}</option>
+                    <option value="{{ color.color_id }}" {% if color.color_id == productVersion.color_id %} selected {% endif %}>{{ color.name|escape }}</option>
                 {% endfor %}
             </select>
             <button type="button" data-toggle="modal" data-target="#colorModal">
@@ -30,9 +29,8 @@ Dashboard - Proizvodi - Stanje - Izmena
         <div>
             <label for="size">Velicina:</label>
             <select name="size" id="size">
-                <option value="{{ productVersion.size_id }}">{{ productVersion.size|escape }}</option>
                 {% for size in sizes %}
-                    <option value="{{ size.size_id }}">{{ size.value|escape }}</option>
+                    <option value="{{ size.size_id }}" {% if size.size_id == productVersion.size_id %} selected {% endif %}>{{ size.value|escape }}</option>
                 {% endfor %}
             </select>             
             <button type="button" data-toggle="modal" data-target="#sizeModal">

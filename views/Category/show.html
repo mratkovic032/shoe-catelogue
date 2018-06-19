@@ -2,12 +2,11 @@
 
 {% block main %}
     <h2>{{ category.name|escape }}</h2>
-    <p>Spisak proizvoda u ovoj kategoriji je:</p>
-    {% for product in productsInCategory %}
+    {% for brand in brands %}
         <ul>
             <li>
-            <a href="{{ BASE }}product/{{ product.product_id }}">
-                {{ product.title|escape }}              
+            <a href="{{ BASE }}/category/{{ category.category_id }}/brand/{{ brand.brand_id }}">
+                {{ brand.name|escape }}              
             </a>
         </ul>    
     {% endfor %}

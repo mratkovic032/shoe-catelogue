@@ -1,0 +1,19 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+    <h2>{{ category.name|escape }} - {{ brand.name|escape }}</h2>
+    <p>Spisak proizvoda:</p>
+    {% for product in products %}
+        <ul>
+            <li>
+            <a href="{{ BASE }}/product/{{ product.product_id }}">
+                {{ product.title|escape }}              
+            </a>
+            <p>{{ product.description|escape }}</p>
+        </ul>    
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+{{ category.name|escape }} - {{ brand.name|escape }}
+{% endblock %}

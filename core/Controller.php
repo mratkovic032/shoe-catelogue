@@ -7,7 +7,7 @@
     class Controller {
         private $dbc;
         private $session;
-        private $data = [];
+        private $data = [];        
 
         public function __pre() {
             
@@ -48,5 +48,9 @@
             ob_clean();
             header('Location: ' . $path, true, $code);
             exit;
+        }  
+        
+        public function getSessionAdminId() {
+            $this->set('sessionAdminId', $this->getSession()->get('admin_id'));
         }
     }

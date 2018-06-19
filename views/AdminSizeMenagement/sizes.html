@@ -26,7 +26,7 @@ Dashboard - Velicine
                 <tr>
                     <td>{{ size.size_id }}</td>
                     <td>{{ size.value }}</td>
-                    <td><a href="{{ BASE }}admin/sizes/edit/{{ size.size_id }}">Izmeni</a></td>
+                    <td><a href="{{ BASE }}admin/sizes/edit/{{ size.size_id }}">Izmeni</a> / <a href="{{ BASE }}admin/sizes/delete/{{ size.size_id }}">Obrisi</a></td>
                 </tr>
                 {% endfor %}                
             </tbody>

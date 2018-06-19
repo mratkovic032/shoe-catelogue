@@ -16,21 +16,25 @@ Dashboard - Proizvodi - Izmena
         <div>
             <label for="category">Kategorija:</label>
             <select name="category" id="category">
-                <option value="{{ product.category_id }}">{{ product.category|escape }}</option>
                 {% for category in categories %}
-                    <option value="{{ category.category_id }}">{{ category.name|escape }}</option>
+                    <option value="{{ category.category_id }}" {% if category.category_id == product.category_id %} selected {% endif %}>{{ category.name|escape }}</option>
                 {% endfor %}
-            </select>            
+            </select>
+            <button type="button" data-toggle="modal" data-target="#categoryModal">
+                Dodaj novu kategoriju
+            </button>           
         </div>
 
         <div>
             <label for="brand">Brend:</label>
             <select name="brand" id="brand">
-                <option value="{{ product.brand_id }}">{{ product.brand|escape }}</option>
                 {% for brand in brands %}
-                    <option value="{{ brand.brand_id }}">{{ brand.name|escape }}</option>
+                    <option value="{{ brand.brand_id }}" {% if brand.brand_id == product.brand_id %} selected {% endif %}>{{ brand.name|escape }}</option>
                 {% endfor %}
-            </select> 
+            </select>
+            <button type="button" data-toggle="modal" data-target="#brandModal">
+                Doddaj novi brend
+            </button>            
         </div>
 
         <div>
@@ -51,21 +55,53 @@ Dashboard - Proizvodi - Izmena
         <div>
             <label for="price">Cena:</label>
             <input type="number" id="price" name="price" value="{{ product.price }}">
-        </div>               
-
-        <div>
-            <label for="admin">Admin:</label>
-            <select name="admin" id="admin">
-                <option value="{{ product.admin_id }}">{{ product.admin|escape }}</option>
-                {% for admin in admins %}
-                    <option value="{{ admin.admin_id }}">{{ admin.username|escape }}</option>
-                {% endfor %}
-            </select> 
         </div>
 
         <div>
             <button type="submit">Izmeni proizvod</button>
         </div>
     </form>
+
+    <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Dodavanje nove kategorije</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="new_color">Unesite novu kategoriju</label>
+                        <input class="form-control" type="text" id="new_category" name="new_category">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addCategory();">Dodaj kategorjiu</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="brandModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Dodavanje novog brenda</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="new_size">Unesite novi brend:</label>
+                        <input class="form-control" type="text" id="new_brand" name="new_brand">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addBrand();">Dodaj brend</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
 {% endblock %}

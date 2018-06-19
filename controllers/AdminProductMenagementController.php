@@ -17,33 +17,28 @@
         } 
 
         public function stock(int $productId) {
+            $brandtModel = new BrandModel($this->getDatabaseConnection());
+            $brandTitle = $brandtModel->getBrandAndTitleByProductId($productId);            
+            $this->set('brandTitle', $brandTitle);
+
             $productModel = new ProductModel($this->getDatabaseConnection());
             $stock = $productModel->showStockByProductId($productId);
             
-            if (!$stock) {
-                $this->redirect(\Configuration::BASE . 'admin/products');
-                exit;
-            }
-            
             $this->set('stock', $stock);            
-            $this->set('id', $productId);
-            $this->set('title', $stock[0]->brand . ' - ' . $stock[0]->title);
+            $this->set('id', $productId);            
         }
 
         public function getProductEdit($productId) {
             $productModel = new ProductModel($this->getDatabaseConnection());
-            $product = $productModel->showWholeProduct($productId);
-            if (!$product) {
-                $this->redirect(\Configuration::BASE . 'admin/products');
-            }            
+            $product = $productModel->showWholeProduct($productId);                               
             $this->set('product', $product);
 
             $brandModel = new BrandModel($this->getDatabaseConnection());
-            $brands = $brandModel->getAllExceptOne("name", $product->brand);
+            $brands = $brandModel->getAll();
             $this->set('brands', $brands);
 
             $categoryModel = new CategoryModel($this->getDatabaseConnection());
-            $categories = $categoryModel->getAllExceptOne("name", $product->category);
+            $categories = $categoryModel->getAll();
             $this->set('categories', $categories);
 
             return $productModel;
@@ -54,7 +49,7 @@
 
             $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
             $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-            $price = filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $price = sprintf("%.2f", filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION));
             $material = filter_input(INPUT_POST, 'material', FILTER_SANITIZE_STRING);    
             $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT); 
             $brand = filter_input(INPUT_POST, 'brand', FILTER_SANITIZE_NUMBER_INT); 
@@ -86,12 +81,11 @@
         public function postProductAdd() {
             $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
             $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-            $price = filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $price = sprintf("%.2f", filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION));
             $material = filter_input(INPUT_POST, 'material', FILTER_SANITIZE_STRING);    
             $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT);
             $brand = filter_input(INPUT_POST, 'brand', FILTER_SANITIZE_NUMBER_INT);  
             $admin = $this->getSession()->get('admin_id'); 
-
 
             $productModel = new ProductModel($this->getDatabaseConnection());
             $productId = $productModel->add([ 
@@ -113,6 +107,10 @@
 
         public function getStockAdd(int $productId) {
             $this->set('id', $productId);
+
+            $brandModel = new BrandModel($this->getDatabaseConnection());
+            $brandTitle = $brandModel->getBrandAndTitleByProductId($productId);
+            $this->set('brandTitle', $brandTitle);            
 
             $productModel = new ProductModel($this->getDatabaseConnection());
             $product = $productModel->showWholeProduct($productId);
@@ -158,11 +156,11 @@
             $this->set('productVersion', $productVersion);
 
             $colorModel = new ColorModel($this->getDatabaseConnection());
-            $colors = $colorModel->getAllExceptOne("name", $productVersion->color);
+            $colors = $colorModel->getAll();
             $this->set('colors', $colors);
 
             $sizeModel = new SizeModel($this->getDatabaseConnection());
-            $sizes = $sizeModel->getAllExceptOne("value", $productVersion->size);
+            $sizes = $sizeModel->getAll();
             $this->set('sizes', $sizes);
 
             return $productVersionModel;
@@ -184,5 +182,12 @@
             ]);   
 
             $this->redirect(\Configuration::BASE . 'admin/products/stock/' . $product);
+        }
+
+        public function deleteStock(int $productId, int $productVersionId) {
+            $productVersionModel = new ProductVersionModel($this->getDatabaseConnection());
+            $productVersionModel->deleteById($productVersionId);
+
+            $this->redirect(\Configuration::BASE . 'admin/products/stock/' . $productId);
         }
     }

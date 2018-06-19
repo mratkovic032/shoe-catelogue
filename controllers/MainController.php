@@ -18,7 +18,7 @@
             $oldValue = $this->getSession()->get('counter', 0);
             $newValue = $oldValue + 1;            
             $this->getSession()->put('counter', $newValue);
-
+            
             $this->set('sessionData', $newValue);
         }    
         

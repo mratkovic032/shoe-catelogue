@@ -2,7 +2,7 @@
     namespace App\Controllers;
 
     use App\Models\CategoryModel;
-    use App\Models\ProductModel;
+    use App\Models\BrandModel;
     use App\Core\Controller;
 
     class CategoryController extends Controller {        
@@ -15,8 +15,8 @@
             }           
             $this->set('category', $category);
 
-            $productModel = new ProductModel($this->getDatabaseConnection());
-            $productsInCategory = $productModel->getAllByCategoryId($id);
-            $this->set('productsInCategory', $productsInCategory);
+            $brandModel = new BrandModel($this->getDatabaseConnection());    
+            $brands = $brandModel->getBrandsByCategoryId($id);
+            $this->set('brands', $brands);            
         }
     }

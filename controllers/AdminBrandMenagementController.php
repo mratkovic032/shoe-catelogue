@@ -17,7 +17,7 @@
             $this->set('brands', $brands);
         }       
 
-        public function getBrandEdit($brandId) {
+        public function getEdit($brandId) {
             $brandModel = new BrandModel($this->getDatabaseConnection());
             $brand = $brandModel->getById($brandId);
             if (!$brand) {
@@ -28,8 +28,8 @@
             return $brandModel;
         }
 
-        public function postBrandEdit($brandId) {
-            $brandModel = $this->getBrandEdit($brandId);
+        public function postEdit($brandId) {
+            $brandModel = $this->getEdit($brandId);
 
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 
@@ -40,11 +40,11 @@
             $this->redirect(\Configuration::BASE . 'admin/brands');
         }
 
-        public function getBrandAdd() {
+        public function getAdd() {
 
         }
 
-        public function postBrandAdd() {
+        public function postAdd() {
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 
             $brandModel = new BrandModel($this->getDatabaseConnection());
@@ -57,5 +57,12 @@
             }
 
             $this->set('message', 'Nije uspesno dodat brend');
+        }
+
+        public function delete(int $sizeId) {
+            $brandModel = new BrandModel($this->getDatabaseConnection());
+            $brandModel->deleteById($sizeId);
+
+            $this->redirect(\Configuration::BASE . 'admin/brands');
         }
     }

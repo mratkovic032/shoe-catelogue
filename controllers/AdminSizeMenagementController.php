@@ -12,7 +12,7 @@
             $this->set('sizes', $sizes);
         }
 
-        public function getSizeEdit($sizeId) {
+        public function getEdit($sizeId) {
             $sizeModel = new SizeModel($this->getDatabaseConnection());
             $size = $sizeModel->getById($sizeId);
             if (!$size) {
@@ -23,8 +23,8 @@
             return $sizeModel;
         }
 
-        public function postSizeEdit($sizeId) {
-            $sizeModel = $this->getSizeEdit($sizeId);
+        public function postEdit($sizeId) {
+            $sizeModel = $this->getEdit($sizeId);
 
             $size = filter_input(INPUT_POST, 'size', FILTER_SANITIZE_NUMBER_INT);
 
@@ -35,11 +35,11 @@
             $this->redirect(\Configuration::BASE . 'admin/sizes');
         }
 
-        public function getSizeAdd() {
+        public function getAdd() {
 
         }
 
-        public function postSizeAdd() {
+        public function postAdd() {
             $size = filter_input(INPUT_POST, 'size', FILTER_SANITIZE_NUMBER_INT);
 
             $sizeModel = new SizeModel($this->getDatabaseConnection());
@@ -52,5 +52,12 @@
             }
 
             $this->set('message', 'Nije uspesno dodata velicina');
+        }
+
+        public function delete(int $sizeId) {
+            $sizeModel = new SizeModel($this->getDatabaseConnection());
+            $sizeModel->deleteById($sizeId);
+
+            $this->redirect(\Configuration::BASE . 'admin/sizes');
         }
     }

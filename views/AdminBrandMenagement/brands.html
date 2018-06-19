@@ -28,7 +28,7 @@ Dashboard - Brendovi
                     <td>{{ brand.brand_id }}</td>
                     <td>{{ brand.created_at }}</td>
                     <td>{{ brand.name|escape }}</td>
-                    <td><a href="{{ BASE }}admin/brands/edit/{{ brand.brand_id }}">Izmeni</a></td>
+                    <td><a href="{{ BASE }}admin/brands/edit/{{ brand.brand_id }}">Izmeni</a> / <a href="{{ BASE }}admin/brands/delete/{{ brand.brand_id }}">Obrisi</a></td>
                 </tr>
                 {% endfor %}                
             </tbody>

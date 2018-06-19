@@ -47,18 +47,6 @@
             return $items;
         }
 
-        final public function getAllExceptOne(string $field, string $value):array {
-            $tableName = $this->getTableName();
-            $sql = 'SELECT * FROM ' . $tableName . ' WHERE NOT (' . $field . ' = ?);';
-            $prep = $this->dbc->getConnection()->prepare($sql);
-            $res = $prep->execute([ $value ]);
-            $items = [];
-            if ($res) {
-                $items = $prep->fetchAll(\PDO::FETCH_OBJ);
-            }            
-            return $items;
-        }
-
         final private function isFieldValueValid(string $fieldName, $fieldValue): bool {
             $fields = $this->getFields();
             $supportedFieldNames = array_keys($fields);
@@ -158,6 +146,6 @@
             $tableName = $this->getTableName();
             $sql = 'DELETE FROM ' . $tableName . ' WHERE ' . $tableName . '_id = ?;';
             $prep = $this->dbc->getConnection()->prepare($sql);
-            return $prep->execute([ $id ]);            
+            return $prep->execute([ $id ]);
         }
     }

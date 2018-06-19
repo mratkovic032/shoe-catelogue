@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="{{ BASE }}assets/css/main.css">
     </head>
 
-    <body>
+    <body>        
         <div class="container">
             <header>
                 <div class="row">
@@ -28,20 +28,26 @@
                                 <a class="nav-item nav-link" href="{{ BASE }}">Pocetna</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-item nav-link" href="{{ BASE }}categories">Kategorije</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-item nav-link" href="{{ BASE }}admin/profile">Profile</a>
+                                <a class="nav-item nav-link" href="{{ BASE }}brands">Brendovi</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-item nav-link" href="{{ BASE }}contact">Kontakt</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-item nav-link" href="{{ BASE }}admin/login">Prijava</a>                  
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-item nav-link" href="{{ BASE }}admin/dashboard">Dashboard</a>                  
-                            </li>
+                            </li>                            
+                            {% if sessionAdminId > 0 %}
+                                <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{{ BASE }}admin/logout">Odjava</a>                  
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{{ BASE }}admin/profile">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{{ BASE }}admin/dashboard">Dashboard</a>                  
+                                </li>
+                            {% else %}    
+                                <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{{ BASE }}admin/login">Prijava</a>                  
+                                </li>
+                            {% endif %}                            
                         </ul>
                         <form method="POST" action="{{ BASE }}search" class="form-inline my-2 my-lg-0">
                             <input class="form-control mr-sm-2" name="search" type="search" placeholder="Kljucne reci" aria-label="Search" required pattern="[^\s]{2,}">
@@ -61,7 +67,7 @@
             </div> 
 
             <footer class="text-center">
-                &copy; 2018 -  Milos Ratkovic <a href="#">Link</a>
+                &copy; 2018 -  Milos Ratkovic
             </footer>
         </div>    
 

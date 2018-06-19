@@ -26,7 +26,7 @@ Dashboard - Boje
                 <tr>
                     <td>{{ color.color_id }}</td>
                     <td>{{ color.name }}</td>
-                    <td><a href="{{ BASE }}admin/colors/edit/{{ color.color_id }}">Izmeni</a></td>
+                    <td><a href="{{ BASE }}admin/colors/edit/{{ color.color_id }}">Izmeni</a> / <a href="{{ BASE }}admin/colors/delete/{{ color.color_id }}">Obrisi</a></td>
                 </tr>
                 {% endfor %}                
             </tbody>

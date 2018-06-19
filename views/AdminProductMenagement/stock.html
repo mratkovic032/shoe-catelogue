@@ -6,7 +6,7 @@ Dashboard - Proizvodi - Stanje
 
 {% block main %}
 <div>
-    <h2>{{ title }}</h2>
+    <h2>{{ brandTitle.name }} - {{ brandTitle.title }}</h2>
     <div class="options">
         <a href="{{ BASE }}admin/products">Vidi sve proizvode</a><br />
         <a href="{{ BASE }}admin/products/stock/add/{{ id }}">Dodaj novo stanje</a>
@@ -31,7 +31,7 @@ Dashboard - Proizvodi - Stanje
                     <td>{{ product.color|escape }}</td>                    
                     <td>{{ product.size }}</td>
                     <td>{{ product.quantity }}</td>                                       
-                    <td><a href="{{ BASE }}admin/products/stock/edit/{{ product.product_version_id }}">Izmeni</a></td>
+                    <td><a href="{{ BASE }}admin/products/stock/edit/{{ product.product_version_id }}">Izmeni</a> / <a href="{{ BASE }}admin/products/stock/{{ id }}/delete/{{ product.product_version_id }}">Obrisi</a></td>
                 </tr>
                 {% endfor %}                
             </tbody>

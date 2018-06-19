@@ -17,7 +17,7 @@
             $this->set('categories', $categories);
         }    
 
-        public function getCategoryEdit($categoryId) {
+        public function getEdit($categoryId) {
             $categoryModel = new CategoryModel($this->getDatabaseConnection());
             $category = $categoryModel->getById($categoryId);
             if (!$category) {
@@ -28,8 +28,8 @@
             return $categoryModel;
         }
 
-        public function postCategoryEdit($categoryId) {
-            $categoryModel = $this->getCategoryEdit($categoryId);
+        public function postEdit($categoryId) {
+            $categoryModel = $this->getEdit($categoryId);
 
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 
@@ -40,11 +40,11 @@
             $this->redirect(\Configuration::BASE . 'admin/categories');
         }
 
-        public function getCategoryAdd() {
+        public function getAdd() {
 
         }
 
-        public function postCategoryAdd() {
+        public function postAdd() {
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 
             $categoryModel = new CategoryModel($this->getDatabaseConnection());
@@ -57,5 +57,12 @@
             }
 
             $this->set('message', 'Nije uspesno dodata kategorija');
-        }        
+        }
+        
+        public function delete(int $sizeId) {
+            $categoryModel = new CategoryModel($this->getDatabaseConnection());
+            $categoryModel->deleteById($sizeId);
+
+            $this->redirect(\Configuration::BASE . 'admin/categories');
+        }
     }

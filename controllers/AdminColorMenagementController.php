@@ -12,7 +12,7 @@
             $this->set('colors', $colors);
         }
 
-        public function getColorEdit($colorId) {
+        public function getEdit($colorId) {
             $colorModel = new ColorModel($this->getDatabaseConnection());
             $color = $colorModel->getById($colorId);
             if (!$color) {
@@ -23,8 +23,8 @@
             return $colorModel;
         }
 
-        public function postColorEdit($colorId) {
-            $colorModel = $this->getColorEdit($colorId);
+        public function postEdit($colorId) {
+            $colorModel = $this->getEdit($colorId);
 
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 
@@ -35,11 +35,11 @@
             $this->redirect(\Configuration::BASE . 'admin/colors');
         }
 
-        public function getColorAdd() {
+        public function getAdd() {
 
         }
 
-        public function postColorAdd() {
+        public function postAdd() {
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 
             $colorModel = new ColorModel($this->getDatabaseConnection());
@@ -52,5 +52,12 @@
             }
 
             $this->set('message', 'Nije uspesno dodata boja');
+        }
+
+        public function delete(int $sizeId) {
+            $colorModel = new ColorModel($this->getDatabaseConnection());
+            $colorModel->deleteById($sizeId);
+
+            $this->redirect(\Configuration::BASE . 'admin/colors');
         }
     }
