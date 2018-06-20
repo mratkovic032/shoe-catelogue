@@ -105,9 +105,11 @@
                 'brand_id'       => $brand
             ]);
 
-            $uploadStatus = $this->doImageUpload('image', $productId);
-            if (!$uploadStatus) {                
-                return;
+            if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+                $uploadStatus = $this->doImageUpload('image', $productId);
+                if (!$uploadStatus) {                
+                    return;
+                }
             }
 
             $this->redirect(\Configuration::BASE . 'admin/products');

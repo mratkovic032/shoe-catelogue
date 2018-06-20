@@ -14,7 +14,7 @@ Dashboard - Proizvodi - Dodavanje novog
     <form method="POST" enctype="multipart/form-data">
         <div>
             <label for="category">Kategorija:</label>
-            <select name="category" id="category">
+            <select name="category" id="category" required>
                 <option>- - -</option>
                 {% for category in categories %}
                     <option value="{{ category.category_id }}">{{ category.name|escape }}</option>
@@ -24,7 +24,7 @@ Dashboard - Proizvodi - Dodavanje novog
 
         <div>
             <label for="brand">Brend:</label>
-            <select name="brand" id="brand">
+            <select name="brand" id="brand" required>
                 <option>- - -</option>
                 {% for brand in brands %}
                     <option value="{{ brand.brand_id }}">{{ brand.name|escape }}</option>
