@@ -14,16 +14,4 @@
                 'value'      => new Field((new StringValidator())->setMaxLength(255)) 
             ];
         }
-        
-
-        public function getLastSize() {
-            $sql = 'SELECT * FROM size ORDER BY size_id DESC LIMIT 1;';
-            $prep = $this->getConnection()->prepare($sql);            
-            $res = $prep->execute();            
-            $size = NULL;
-            if ($res) {
-                $size = $prep->fetch(\PDO::FETCH_OBJ);
-            }
-            return $size;
-        }
     }

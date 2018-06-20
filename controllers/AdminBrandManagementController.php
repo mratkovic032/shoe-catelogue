@@ -10,7 +10,7 @@
     use App\Models\AdminModel;
     use App\Models\ProductVersionModel;
 
-    class AdminBrandMenagementController extends AdminRoleController {
+    class AdminBrandManagementController extends AdminRoleController {
         public function brands() {
             $brandModel = new BrandModel($this->getDatabaseConnection());
             $brands = $brandModel->getAll();

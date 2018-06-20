@@ -10,7 +10,7 @@
     use App\Models\AdminModel;
     use App\Models\ProductVersionModel;
 
-    class AdminCategoryMenagementController extends AdminRoleController {     
+    class AdminCategoryManagementController extends AdminRoleController {     
         public function categories() {
             $categoryModel = new CategoryModel($this->getDatabaseConnection());
             $categories = $categoryModel->getAll();            

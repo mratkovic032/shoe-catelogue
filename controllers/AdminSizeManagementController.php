@@ -4,7 +4,7 @@
     use App\Core\Role\AdminRoleController;
     use App\Models\SizeModel;
 
-    class AdminSizeMenagementController extends AdminRoleController {
+    class AdminSizeManagementController extends AdminRoleController {
 
         public function sizes() {
             $sizeModel = new SizeModel($this->getDatabaseConnection());

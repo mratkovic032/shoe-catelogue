@@ -9,7 +9,7 @@
     use App\Models\BrandModel;
     use App\Models\ProductVersionModel;
 
-    class AdminProductMenagementController extends AdminRoleController {
+    class AdminProductManagementController extends AdminRoleController {
         public function products() {
             $productModel = new ProductModel($this->getDatabaseConnection());
             $productsWithBrandAndCategory = $productModel->showProductsWithBrandAndCategory();
