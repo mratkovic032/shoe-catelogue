@@ -28,46 +28,6 @@
             $this->set('id', $productId);            
         }
 
-        public function getProductEdit($productId) {
-            $productModel = new ProductModel($this->getDatabaseConnection());
-            $product = $productModel->showWholeProduct($productId);                               
-            $this->set('product', $product);
-
-            $brandModel = new BrandModel($this->getDatabaseConnection());
-            $brands = $brandModel->getAll();
-            $this->set('brands', $brands);
-
-            $categoryModel = new CategoryModel($this->getDatabaseConnection());
-            $categories = $categoryModel->getAll();
-            $this->set('categories', $categories);
-
-            return $productModel;
-        }
-
-        public function postProductEdit($productId) {
-            $productModel = $this->getProductEdit($productId);
-
-            $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-            $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-            $price = sprintf("%.2f", filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION));
-            $material = filter_input(INPUT_POST, 'material', FILTER_SANITIZE_STRING);    
-            $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT); 
-            $brand = filter_input(INPUT_POST, 'brand', FILTER_SANITIZE_NUMBER_INT); 
-            $admin = filter_input(INPUT_POST, 'admin', FILTER_SANITIZE_NUMBER_INT); 
-
-            $productModel->editById($productId, [
-                'title'          => $title,  
-                'description'    => $description,  
-                'price'          => $price, 
-                'material'       => $material,  
-                'category_id'    => $category,
-                'brand_id'       => $brand,
-                'admin_id'       => $admin
-            ]);
-
-            $this->redirect(\Configuration::BASE . 'admin/products');
-        }
-
         public function getProductAdd() {
             $categoryModel = new CategoryModel($this->getDatabaseConnection());
             $categories = $categoryModel->getAll();
@@ -98,12 +58,60 @@
                 'admin_id'         => $admin
             ]);
 
-            if ($productId) {
-                $this->redirect(\Configuration::BASE . 'admin/products');                
+            if (!$productId) {
+                $this->set('message', 'Nije uspesno dodat proizvod');
+            }
+            
+            $uploadStatus = $this->doImageUpload('image', $productId);
+            if (!$uploadStatus) {                
+                return;
+            }
+                        
+            $this->redirect(\Configuration::BASE . 'admin/products');                
+        }
+
+        public function getProductEdit($productId) {
+            $productModel = new ProductModel($this->getDatabaseConnection());
+            $product = $productModel->showEditProduct($productId);                               
+            $this->set('product', $product);
+
+            $brandModel = new BrandModel($this->getDatabaseConnection());
+            $brands = $brandModel->getAll();
+            $this->set('brands', $brands);
+
+            $categoryModel = new CategoryModel($this->getDatabaseConnection());
+            $categories = $categoryModel->getAll();
+            $this->set('categories', $categories);
+
+            return $productModel;
+        }
+
+        public function postProductEdit($productId) {
+            $productModel = $this->getProductEdit($productId);
+
+            $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+            $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+            $price = sprintf("%.2f", filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION));
+            $material = filter_input(INPUT_POST, 'material', FILTER_SANITIZE_STRING);    
+            $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT); 
+            $brand = filter_input(INPUT_POST, 'brand', FILTER_SANITIZE_NUMBER_INT);  
+
+            $productModel->editById($productId, [
+                'title'          => $title,  
+                'description'    => $description,  
+                'price'          => $price, 
+                'material'       => $material,  
+                'category_id'    => $category,
+                'brand_id'       => $brand
+            ]);
+
+            $uploadStatus = $this->doImageUpload('image', $productId);
+            if (!$uploadStatus) {                
+                return;
             }
 
-            $this->set('message', 'Nije uspesno dodat proizvod');
-        }                
+            $this->redirect(\Configuration::BASE . 'admin/products');
+        }                        
 
         public function getStockAdd(int $productId) {
             $this->set('id', $productId);
@@ -189,5 +197,25 @@
             $productVersionModel->deleteById($productVersionId);
 
             $this->redirect(\Configuration::BASE . 'admin/products/stock/' . $productId);
+        }
+
+        private function doImageUpload(string $fieldName, string $fileName): bool {
+            unlink(\Configuration::UPLOAD_DIR . $fileName . '.jpg');
+
+            $uploadPath = new \Upload\Storage\FileSystem(\Configuration::UPLOAD_DIR);
+            $file = new \Upload\File($fieldName, $uploadPath);
+            $file->setName($fileName);
+            $file->addValidations([
+                new \Upload\Validation\Mimetype("image/jpeg"),
+                new \Upload\Validation\Size("3M")
+            ]);
+
+            try {
+                $file->upload();
+                return true;
+            } catch (Exception $e) {
+                $this->set('message', 'Greska: ' . implode(', ', $file->getErrors()));
+                return false;
+            }
         }
     }
