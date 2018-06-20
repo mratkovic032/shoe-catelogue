@@ -1,0 +1,17 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+    <h2>Brendovi</h2>
+    {% for brand in brands %}
+        <ul>
+            <li>
+            <a href="{{ BASE }}brand/{{ brand.brand_id }}">
+                {{ brand.name|escape }}              
+            </a>
+        </ul>    
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+Brendovi
+{% endblock %}

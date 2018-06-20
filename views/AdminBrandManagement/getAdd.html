@@ -14,7 +14,7 @@ Dashboard - Brendovi - Dodavanje novog
     <form method="POST">
         <div>
             <label for="name">Naziv brenda:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required pattern=".*[^\s]{2,}.*">
         </div>
         
         <div>

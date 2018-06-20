@@ -15,7 +15,7 @@ Dashboard - Boje - Izmena
     <form method="POST">
         <div>
             <label for="name">Naziv boje:</label>
-            <input type="text" id="name" name="name" value="{{ color.name }}">
+            <input type="text" id="name" name="name" value="{{ color.name }}" required pattern=".*[^\s]{3,}.*">
         </div>
         
         <div>

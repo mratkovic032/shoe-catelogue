@@ -15,7 +15,7 @@ Dashboard - Velicine - Izmena
     <form method="POST">
         <div>
             <label for="size">Velicina:</label>
-            <input type="text" id="size" name="size" value="{{ size.value }}">
+            <input type="text" min="1" id="size" name="size" value="{{ size.value }}" required>
         </div>
         
         <div>

@@ -15,7 +15,7 @@ Dashboard - Kategorije - Izmena
     <form method="POST">
         <div>
             <label for="name">Naziv kategorije:</label>
-            <input type="text" id="name" name="name" value="{{ category.name }}">
+            <input type="text" id="name" name="name" value="{{ category.name }}" required pattern=".*[^\s]{3,}.*">
         </div>
         
         <div>

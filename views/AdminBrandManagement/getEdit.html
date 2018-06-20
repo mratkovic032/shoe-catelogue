@@ -15,7 +15,7 @@ Dashboard - Brendovi - Izmena
     <form method="POST">
         <div>
             <label for="name">Naziv brenda:</label>
-            <input type="text" id="name" name="name" value="{{ brand.name }}">
+            <input type="text" id="name" name="name" value="{{ brand.name }}" required pattern=".*[^\s]{2,}.*" >
         </div>
         
         <div>
