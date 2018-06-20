@@ -102,4 +102,11 @@
             
             $this->redirect(\Configuration::BASE . 'admin/dashboard');
         }
+
+        public function getLogout() {
+            $this->getSession()->remove('admin_id');
+            $this->getSession()->save();
+            
+            $this->redirect(\Configuration::BASE);
+        }
     }

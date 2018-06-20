@@ -4,7 +4,8 @@
         # App\Core\Route::get('|^admin/register/?$|',                 'Main',                         'getRegister'),
         # App\Core\Route::post('|^admin/register/?$|',                'Main',                         'postRegister'),
         App\Core\Route::get('|^admin/login/?$|',                    'Main',                         'getLogin'),
-        App\Core\Route::post('|^admin/login/?$|',                   'Main',                         'postLogin'),        
+        App\Core\Route::post('|^admin/login/?$|',                   'Main',                         'postLogin'),
+        App\Core\Route::get('|^admin/logout/?$|',                   'Main',                         'getLogout'),        
 
         # Guest role routes:
         App\Core\Route::get('|^category/([0-9]+/?)$|',                  'Category',                     'show'),
@@ -12,7 +13,8 @@
         App\Core\Route::get('|^category/([0-9]+)/brand/([0-9]+/?)$|',   'Brand',                        'show'),        
 
         # Admin role routes:
-            App\Core\Route::get('|^admin/dashboard/?$|',                        'AdminDashboard',               'index'),                                          
+            App\Core\Route::get('|^admin/dashboard/?$|',                        'AdminDashboard',               'index'),
+            App\Core\Route::get('|^admin/profile/?$|',                          'AdminDashboard',               'profile'),
 
             # Products        
             App\Core\Route::get('|^admin/products/?$|',                         'AdminProductMenagement',       'products'),
