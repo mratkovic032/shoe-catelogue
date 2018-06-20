@@ -11,7 +11,7 @@ Dashboard - Proizvodi - Izmena
     </div>
     <br />
     
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" onsubmit="return validateProduct();">
         <input type="number" id="product_version_id" name="product_version_id" value="{{ product.product_version_id }}" hidden>
         <div>
             <label for="category">Kategorija:</label>
@@ -39,17 +39,20 @@ Dashboard - Proizvodi - Izmena
 
         <div>
             <label for="title">Model:</label>
-            <input type="text" id="title" name="title" value="{{ product.title|escape }}" required pattern=".*[^\s]{3,}.*">
+            <input type="text" id="title" name="title" value="{{ product.title|escape }}" required><br />
+            <label class="d-none" id="error-title"></label>
         </div>
 
         <div>
             <label for="description">Opsi:</label>
-            <textarea rows="4" id="description" name="description" required pattern=".*[^\s]{10,}.*">{{ product.description|escape }}</textarea>
+            <textarea rows="4" id="description" name="description" required>{{ product.description|escape }}</textarea><br />
+            <label class="d-none" id="error-description"></label>
         </div>
 
         <div>
             <label for="material">Materijal:</label>
-            <input type="text" id="material" name="material" value="{{ product.material|escape }}" required>
+            <input type="text" id="material" name="material" value="{{ product.material|escape }}" required><br />
+            <label class="d-none" id="error-material"></label>
         </div> 
 
         <div>
@@ -78,10 +81,11 @@ Dashboard - Proizvodi - Izmena
                 </div>
                 <div class="modal-body">
                     <label for="new_color">Unesite novu kategoriju</label>
-                    <input class="form-control" type="text" id="new_category" name="new_category" required pattern=".*[^\s]{3,}.*">
+                    <input class="form-control" type="text" id="new_category" name="new_category" required><br />
+                    <label class="d-none" id="error-category"></label>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addCategory();">Dodaj kategorjiu</button>
+                    <button type="button" class="btn btn-primary" onclick="addCategory();">Dodaj kategorjiu</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
                 </div>
             </div>
@@ -99,14 +103,19 @@ Dashboard - Proizvodi - Izmena
                 </div>
                 <div class="modal-body">
                     <label for="new_size">Unesite novi brend:</label>
-                    <input class="form-control" type="text" id="new_brand" name="new_brand" required pattern=".*[^\s]{2,}.*">
+                    <input class="form-control" type="text" id="new_brand" name="new_brand" required><br />
+                    <label class="d-none" id="error-brand"></label>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addBrand();">Dodaj brend</button>
+                    <button type="button" class="btn btn-primary" onclick="addBrand();">Dodaj brend</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="{{ BASE }}assets/js/validate.js"></script>
+    <script src="{{ BASE }}assets/js/brand.js"></script>
+    <script src="{{ BASE }}assets/js/category.js"></script>
 </div>
 {% endblock %}
