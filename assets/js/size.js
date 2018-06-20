@@ -8,6 +8,11 @@ function getSizes() {
 
 function addSize() {
     const newSize = document.querySelector('#new_size').value;
+    if (newSize < 16 || newSize > 55) {
+        document.querySelector('#error-size').innerHTML = 'Velicina biti vrednost izmedju 16 i 55';
+        document.querySelector('#error-size').classList.remove('d-none');
+        return;
+    }
     fetch(BASE + 'api/size/add/' + newSize, { credentials: 'include' })
         .then(result => result.json())
         .then(data => {
@@ -18,6 +23,7 @@ function addSize() {
 }
 
 function displaySizes(size) {
+    $('#sizeModal').modal('hide');
     const sizeSelect = document.querySelector('#size');    
 
     const newOption = document.createElement('option');

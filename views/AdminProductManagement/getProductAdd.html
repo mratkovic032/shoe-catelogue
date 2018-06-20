@@ -11,7 +11,7 @@ Dashboard - Proizvodi - Dodavanje novog
     </div>
     <br />
     
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" onsubmit="return validateProduct();">
         <div>
             <label for="category">Kategorija:</label>
             <select name="category" id="category" required>
@@ -40,23 +40,27 @@ Dashboard - Proizvodi - Dodavanje novog
 
         <div>
             <label for="title">Model:</label>
-            <input type="text" id="title" name="title" required pattern=".*[^\s]{3,}.*">
+            <input type="text" id="title" name="title" required><br />
+            <label class="d-none" id="error-title"></label>
         </div>
 
         <div>
             <label for="description">Opis:</label>            
-            <textarea rows="4" id="description" name="description" required pattern=".*[^\s]{10,}.*"></textarea>
+            <textarea rows="4" id="description" name="description" required></textarea><br />
+            <label class="d-none" id="error-description"></label>
         </div>
 
+        <div>
+            <label for="material">Materijal:</label>
+            <input type="text" id="material" name="material" required><br />
+            <label class="d-none" id="error-material"></label>
+        </div>
+        
         <div>
             <label for="price">Cena:</label>
             <input type="number" min="1" step="0.1" id="price" name="price" required>
         </div>
 
-        <div>
-            <label for="material">Materijal:</label>
-            <input type="text" id="material" name="material" required pattern=".*[^\s]{3,}.*">
-        </div>
 
         <div>
             <label for="image">Slika:</label>
@@ -79,10 +83,11 @@ Dashboard - Proizvodi - Dodavanje novog
                 </div>
                 <div class="modal-body">
                     <label for="new_color">Unesite novu kategoriju</label>
-                    <input class="form-control" type="text" id="new_category" name="new_category" required pattern=".*[^\s]{3,}.*">
+                    <input class="form-control" type="text" id="new_category" name="new_category" required><br />
+                    <label class="d-none" id="error-category"></label>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addCategory();">Dodaj kategorjiu</button>
+                    <button type="button" class="btn btn-primary" onclick="addCategory();">Dodaj kategorjiu</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
                 </div>
             </div>
@@ -94,20 +99,25 @@ Dashboard - Proizvodi - Dodavanje novog
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Dodavanje novog brenda</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><br />
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <label for="new_size">Unesite novi brend:</label>
-                    <input class="form-control" type="text" id="new_brand" name="new_brand" required pattern=".*[^\s]{2,}.*">
+                    <input class="form-control" type="text" id="new_brand" name="new_brand" required>
+                    <label class="d-none" id="error-brand"></label>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addBrand();">Dodaj brend</button>
+                    <button type="button" class="btn btn-primary" onclick="addBrand();">Dodaj brend</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
+
+    <script src="{{ BASE }}assets/js/validate.js"></script>
+    <script src="{{ BASE }}assets/js/brand.js"></script>
+    <script src="{{ BASE }}assets/js/category.js"></script>
 </div>
 {% endblock %}

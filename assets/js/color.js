@@ -8,6 +8,11 @@ function getColors() {
 
 function addColor() {
     const newColor = document.querySelector('#new_color').value;
+    if (!newColor.match(/^[A-Z][a-z]{2,}/)) {
+        document.querySelector('#error-color').innerHTML = 'Naziv boje mora da pocne velikim slovom i da sadrzi minimalno tri karaktera';
+        document.querySelector('#error-color').classList.remove('d-none');
+        return;
+    }   
     fetch(BASE + 'api/color/add/' + newColor, { credentials: 'include' })
         .then(result => result.json())
         .then(data => {
@@ -18,6 +23,7 @@ function addColor() {
 }
 
 function displayColors(color) {
+    $('#colorModal').modal('hide');
     const colorSelect = document.querySelector('#color');    
 
     const newOption = document.createElement('option');

@@ -59,10 +59,11 @@ Dashboard - Proizvodi - Stanje - Izmena
                 </div>
                 <div class="modal-body">
                     <label for="new_color">Unesite novu boju</label>
-                    <input class="form-control" type="text" id="new_color" name="new_color" required pattern=".*[^\s]{3,}.*">
+                    <input class="form-control" type="text" id="new_color" name="new_color" required><br />
+                    <label class="d-none" id="error-color"></label>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addColor();">Dodaj boju</button>
+                    <button type="button" class="btn btn-primary" onclick="addColor();">Dodaj boju</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
                 </div>
             </div>
@@ -80,14 +81,18 @@ Dashboard - Proizvodi - Stanje - Izmena
                 </div>
                 <div class="modal-body">
                     <label for="new_size">Unesite novu velicinu:</label>
-                    <input class="form-control" type="number" id="new_size" name="new_size" min="1" required>
+                    <input class="form-control" type="number" id="new_size" name="new_size" min="1" required><br />
+                    <label class="d-none" id="error-size"></label>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addSize();">Dodaj velicinu</button>
+                    <button type="button" class="btn btn-primary" onclick="addSize();">Dodaj velicinu</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="{{ BASE }}assets/js/color.js"></script>
+    <script src="{{ BASE }}assets/js/size.js"></script>
 </div>
 {% endblock %}
