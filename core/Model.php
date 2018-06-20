@@ -35,6 +35,18 @@
             return $item;
         }
 
+        final public function getLastEnteredId() {
+            $tableName = $this->getTableName();
+            $sql = 'SELECT * FROM ' . $tableName . ' ORDER BY ' . $tableName . '_id DESC LIMIT 1;';            
+            $prep = $this->getConnection()->prepare($sql);            
+            $res = $prep->execute();            
+            $id = NULL;
+            if ($res) {
+                $id = $prep->fetch(\PDO::FETCH_OBJ);
+            }
+            return $id;
+        }
+
         final public function getAll(): array {
             $tableName = $this->getTableName();
             $sql = 'SELECT * FROM ' . $tableName . ';';

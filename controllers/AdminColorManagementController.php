@@ -5,7 +5,7 @@
     use App\Models\ColorModel;
 
 
-    class AdminColorMenagementController extends AdminRoleController {
+    class AdminColorManagementController extends AdminRoleController {
         public function colors() {
             $colorModel = new ColorModel($this->getDatabaseConnection());
             $colors = $colorModel->getAll();            

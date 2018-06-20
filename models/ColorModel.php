@@ -13,16 +13,5 @@
 
                 'name'       => new Field((new StringValidator())->setMaxLength(255)) 
             ];
-        }
-
-        public function getLastColor() {
-            $sql = 'SELECT * FROM color ORDER BY color_id DESC LIMIT 1;';
-            $prep = $this->getConnection()->prepare($sql);            
-            $res = $prep->execute();            
-            $color = NULL;
-            if ($res) {
-                $color = $prep->fetch(\PDO::FETCH_OBJ);
-            }
-            return $color;
-        }        
+        }             
     }

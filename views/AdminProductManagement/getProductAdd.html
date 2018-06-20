@@ -1,0 +1,113 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Proizvodi - Dodavanje novog
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/products">Prikazi sve proizvode</a>
+    </div>
+    <br />
+    
+    <form method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="category">Kategorija:</label>
+            <select name="category" id="category" required>
+                <option>- - -</option>
+                {% for category in categories %}
+                    <option value="{{ category.category_id }}">{{ category.name|escape }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" data-toggle="modal" data-target="#categoryModal">
+                Dodaj novu kategoriju
+            </button>             
+        </div> 
+
+        <div>
+            <label for="brand">Brend:</label>
+            <select name="brand" id="brand" required>
+                <option>- - -</option>
+                {% for brand in brands %}
+                    <option value="{{ brand.brand_id }}">{{ brand.name|escape }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" data-toggle="modal" data-target="#brandModal">
+                Doddaj novi brend
+            </button> 
+        </div>
+
+        <div>
+            <label for="title">Model:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+
+        <div>
+            <label for="description">Opis:</label>            
+            <textarea rows="4" cols="30" id="description" name="description"></textarea required>
+        </div>
+
+        <div>
+            <label for="price">Cena:</label>
+            <input type="number" id="price" name="price" required>
+        </div>
+
+        <div>
+            <label for="material">Materijal:</label>
+            <input type="text" id="material" name="material" required>
+        </div>
+
+        <div>
+            <label for="image">Slika:</label>
+            <input type="file" id="image" name="image" required accept="image/jpeg">
+        </div>
+
+        <div>
+            <button type="submit">Dodaj proizvod</button>
+        </div>
+    </form>
+
+    <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Dodavanje nove kategorije</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="new_color">Unesite novu kategoriju</label>
+                    <input class="form-control" type="text" id="new_category" name="new_category">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addCategory();">Dodaj kategorjiu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="brandModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Dodavanje novog brenda</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="new_size">Unesite novi brend:</label>
+                    <input class="form-control" type="text" id="new_brand" name="new_brand">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addBrand();">Dodaj brend</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

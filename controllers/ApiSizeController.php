@@ -24,7 +24,7 @@
                 'value' => $newSize
             ]);
 
-            $size[] = $sizeModel->getLastSize();
+            $size[] = $sizeModel->getLastEnteredId();
             $this->getSession()->put('size', $size);
 
             $this->set('error', 0);

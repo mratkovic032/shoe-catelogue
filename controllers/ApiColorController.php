@@ -24,7 +24,7 @@
                 'name' => $newColor
             ]);
 
-            $color[] = $colorModel->getLastColor();
+            $color[] = $colorModel->getLastEnteredId();
             $this->getSession()->put('color', $color);
 
             $this->set('error', 0);
