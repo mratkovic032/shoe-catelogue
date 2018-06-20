@@ -6,9 +6,10 @@
     {% for product in products %}
         <ul>
             <li>
-            <a href="{{ BASE }}/product/{{ product.product_id }}">
+            <a href="{{ BASE }}product/{{ product.product_id }}">
                 {{ product.title|escape }}              
-            </a>
+            </a><br />
+            <img src="{{ BASE }}assets/uploads/{{ product.product_id }}.jpg" alt="Slika - {{ product.title }}">
             <p>{{ product.description|escape }}</p>
         </ul>    
     {% endfor %}
