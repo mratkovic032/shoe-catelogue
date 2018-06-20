@@ -4,6 +4,7 @@
     use App\Models\CategoryModel;
     use App\Models\ProductModel;
     use App\Models\BrandModel;
+    use App\Models\ImageModel;
     use App\Core\Controller;
 
     class BrandController extends Controller {        
@@ -26,6 +27,14 @@
             $productModel = new ProductModel($this->getDatabaseConnection());
             $products = $productModel->getAllByCategoryIdAndBrandId($categoryId, $brandId);
 
+            $imageModel = new ImageModel($this->getDatabaseConnection());
+            foreach ($products as $product) {                
+                $image = $imageModel->getImageByProductId($product->product_id);
+                if ($image) {
+                    $product->path = $image->path;
+                }                
+            }
+
             $this->set('products', $products);          
         }
 
@@ -38,6 +47,15 @@
         public function brandProducts(int $brandId) {
             $brandModel = new BrandModel($this->getDatabaseConnection());    
             $products = $brandModel->getProductsByBrandId($brandId);
+
+            $imageModel = new ImageModel($this->getDatabaseConnection());
+            foreach ($products as $product) {                
+                $image = $imageModel->getImageByProductId($product->product_id);
+                if ($image) {
+                    $product->path = $image->path;
+                }                
+            }
+
             $this->set('products', $products);
         }
     }

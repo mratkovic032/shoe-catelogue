@@ -3,7 +3,7 @@
 {% block main %}
     <a href="#" onclick="addBookmark({{ product.product_id }});">Dodaj u bookmark</a>
     <h2>{{ brand.name }} - {{ product.title|escape }}</h2>
-    <img src="{{ BASE }}assets/uploads/{{ product.product_id }}.jpg" alt="Slika - {{ product.title }}">
+    <img src="{{ BASE }}assets/uploads/{{ image.path }}" alt="Slika - {{ image.title }}">
     <p>{{ product.description|escape }}</p>    
     <p>Cena: {{ product.price }} din.</p>    
     <p>Materijal: {{ product.material|escape }}</p>

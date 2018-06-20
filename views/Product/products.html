@@ -6,7 +6,7 @@
         <ul>
             <li>
             <label><a href="{{ BASE }}product/{{ product.product_id }}">{{ product.brand|escape }} - {{ product.title|escape }}</a></label><br />
-            <img src="{{ BASE }}assets/uploads/{{ product.product_id }}.jpg" alt="Slika - {{ product.title }}">
+            <img src="{{ BASE }}assets/uploads/{{ product.path }}" alt="Slika - {{ product.title }}">
             <p>{{ product.description|escape }}</p>
             <label>Cena: {{ product.price }}</label><br />
             <label>Kategorija:</label> <a href="{{ BASE }}category/{{ product.category_id }}">{{ product.category|escape }}</a>

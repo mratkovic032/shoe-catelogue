@@ -16,8 +16,8 @@ function validateProduct() {
     }
 
     const description = document.querySelector('#description').value;
-    if (!description.match(/.*[^\s]{15,}.*/)) {
-        document.querySelector('#error-description').innerHTML = 'Opis mora sadrzati minimalno petnaest karaktera';
+    if (!description.match(/.*[^\s]{7,}.*/)) {
+        document.querySelector('#error-description').innerHTML = 'Opis mora sadrzati minimalno sedam karaktera';
         document.querySelector('#error-description').classList.remove('d-none');
         status = false;
     }

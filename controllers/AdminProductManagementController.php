@@ -8,6 +8,7 @@
     use App\Models\SizeModel;
     use App\Models\BrandModel;
     use App\Models\ProductVersionModel;
+    use App\Models\ImageModel;
 
     class AdminProductManagementController extends AdminRoleController {
         public function products() {
@@ -62,7 +63,8 @@
                 $this->set('message', 'Nije uspesno dodat proizvod');
             }
             
-            $uploadStatus = $this->doImageUpload('image', $productId);
+            $fileName = $_FILES['image']['name'];
+            $uploadStatus = $this->doImageUpload('image', $fileName, $productId, "add");
             if (!$uploadStatus) {                
                 return;
             }
@@ -106,7 +108,8 @@
             ]);
 
             if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-                $uploadStatus = $this->doImageUpload('image', $productId);
+                $fileName = $_FILES['image']['name'];
+                $uploadStatus = $this->doImageUpload('image', $fileName, $productId, "edit");
                 if (!$uploadStatus) {                
                     return;
                 }
@@ -201,20 +204,41 @@
             $this->redirect(\Configuration::BASE . 'admin/products/stock/' . $productId);
         }
 
-        private function doImageUpload(string $fieldName, string $fileName): bool {
-            unlink(\Configuration::UPLOAD_DIR . $fileName . '.jpg');
+        private function doImageUpload(string $fieldName, string $fileName, int $productId, string $method): bool {
+            $imageModel = new ImageModel($this->getDatabaseConnection());
+            $image = $imageModel->getImageByProductId($productId);
+
+            unlink(\Configuration::UPLOAD_DIR . $image->path);
 
             $uploadPath = new \Upload\Storage\FileSystem(\Configuration::UPLOAD_DIR);
             $file = new \Upload\File($fieldName, $uploadPath);
-            $file->setName($fileName);
+            // $file->setName($fileName);
             $file->addValidations([
-                new \Upload\Validation\Mimetype("image/jpeg"),
+                new \Upload\Validation\Mimetype(["image/jpeg", "image/png"]),
                 new \Upload\Validation\Size("3M")
             ]);
 
             try {
-                $file->upload();
-                return true;
+                $file->upload();                
+                $fullFileName = $file->getNameWithExtension();
+                $fileName = $file->getName();
+
+                if ($method === "add") {                    
+                    $imageModel->add([
+                        'product_id' =>  $productId,
+                        'title'      =>  $fileName,
+                        'path'       =>  $fullFileName
+                    ]);
+
+                    return true;
+                } else {
+                    $imageModel->editByid($image->image_id, [
+                        'path' => $fullFileName
+                    ]);
+    
+                    return true;                
+                }
+                                               
             } catch (Exception $e) {
                 $this->set('message', 'Greska: ' . implode(', ', $file->getErrors()));
                 return false;

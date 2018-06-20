@@ -5,6 +5,7 @@
     use App\Models\ProductVersionModel;
     use App\Models\ProductViewModel;
     use App\Models\BrandModel;
+    use App\Models\ImageModel;
     use App\Core\Controller;
 
     class ProductController extends Controller {        
@@ -16,6 +17,11 @@
                 $this->redirect(\Configuration::BASE);
                 exit;
             }
+
+            $imageModel = new ImageModel($this->getDatabaseConnection());
+            $image = $imageModel->getImageByProductId($product->product_id);
+
+            $this->set('image', $image);
             $this->set('product', $product);
 
             $brandModel = new BrandModel($this->getDatabaseConnection());
@@ -42,7 +48,16 @@
         public function products() {
             $productModel = new ProductModel($this->getDatabaseConnection());
             $products = $productModel->showProductsWithBrandAndCategory();
-            $this->set('products', $products);
+            
+            $imageModel = new ImageModel($this->getDatabaseConnection());
+            foreach ($products as $product) {                
+                $image = $imageModel->getImageByProductId($product->product_id);
+                if ($image) {
+                    $product->path = $image->path;
+                }                
+            }
+            
+            $this->set('products', $products);            
         }
 
         private function productsInStock($id) {

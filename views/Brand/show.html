@@ -9,7 +9,7 @@
             <a href="{{ BASE }}product/{{ product.product_id }}">
                 {{ product.title|escape }}              
             </a><br />
-            <img src="{{ BASE }}assets/uploads/{{ product.product_id }}.jpg" alt="Slika - {{ product.title }}">
+            <img src="{{ BASE }}assets/uploads/{{ product.path }}" alt="Slika - {{ product.title }}">
             <p>{{ product.description|escape }}</p>
             <label>Cena: {{ product.price }}</label>
         </ul>    

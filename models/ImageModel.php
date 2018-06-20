@@ -18,5 +18,15 @@
                 'path'          => new Field((new StringValidator())->setMaxLength(255)) 
             ];
         }
-        
+
+        public function getImageByProductId(int $productId) {
+            $sql = 'SELECT * FROM image WHERE product_id = ?;';
+            $prep = $this->getConnection()->prepare($sql);            
+            $res = $prep->execute([ $productId ]);            
+            $image = NULL;
+            if ($res) {
+                $image = $prep->fetch(\PDO::FETCH_OBJ);
+            }
+            return $image;
+        }
     }
