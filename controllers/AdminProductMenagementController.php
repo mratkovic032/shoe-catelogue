@@ -72,7 +72,7 @@
 
         public function getProductEdit($productId) {
             $productModel = new ProductModel($this->getDatabaseConnection());
-            $product = $productModel->showWholeProduct($productId);                               
+            $product = $productModel->showEditProduct($productId);                               
             $this->set('product', $product);
 
             $brandModel = new BrandModel($this->getDatabaseConnection());
@@ -200,6 +200,8 @@
         }
 
         private function doImageUpload(string $fieldName, string $fileName): bool {
+            unlink(\Configuration::UPLOAD_DIR . $fileName . '.jpg');
+
             $uploadPath = new \Upload\Storage\FileSystem(\Configuration::UPLOAD_DIR);
             $file = new \Upload\File($fieldName, $uploadPath);
             $file->setName($fileName);

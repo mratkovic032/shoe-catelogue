@@ -90,5 +90,19 @@
                 $productsWithBrandAndCategory = $prep->fetchAll(\PDO::FETCH_OBJ);
             }
             return $productsWithBrandAndCategory; 
-        }        
+        }
+        
+        public function showEditProduct(int $productId) {
+            $sql = 'SELECT product.*, brand.name AS "brand", category.name AS "category", admin.username AS "admin" FROM 
+                    (brand INNER JOIN (product INNER JOIN category ON product.category_id = category.category_id) ON brand.brand_id = product.brand_id) 
+                    INNER JOIN admin ON product.admin_id = admin.admin_id
+                    WHERE product.product_id = ?;';
+            $prep = $this->getConnection()->prepare($sql);            
+            $res = $prep->execute([ $productId ]);            
+            $product = NULL;
+            if ($res) {
+                $product = $prep->fetch(\PDO::FETCH_OBJ);
+            }
+            return $product; 
+        } 
     }
