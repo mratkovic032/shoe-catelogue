@@ -9,8 +9,11 @@
 
         # Guest role routes:
         App\Core\Route::get('|^category/([0-9]+/?)$|',                  'Category',                     'show'),
+        App\Core\Route::get('|^products/?$|',                           'Product',                      'products'),
         App\Core\Route::get('|^product/([0-9]+/?)$|',                   'Product',                      'show'),
-        App\Core\Route::get('|^category/([0-9]+)/brand/([0-9]+/?)$|',   'Brand',                        'show'),        
+        App\Core\Route::get('|^category/([0-9]+)/brand/([0-9]+/?)$|',   'Brand',                        'show'),
+        App\Core\Route::get('|^brand/([0-9]+/?)$|',                     'Brand',                        'brandProducts'),
+        App\Core\Route::get('|^brands/?$|',                             'Brand',                        'brands'),    
 
         # Admin role routes:
             App\Core\Route::get('|^admin/dashboard/?$|',                        'AdminDashboard',               'index'),

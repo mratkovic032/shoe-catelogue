@@ -4,6 +4,7 @@
     use App\Models\ProductModel;
     use App\Models\ProductVersionModel;
     use App\Models\ProductViewModel;
+    use App\Models\BrandModel;
     use App\Core\Controller;
 
     class ProductController extends Controller {        
@@ -16,6 +17,10 @@
                 exit;
             }
             $this->set('product', $product);
+
+            $brandModel = new BrandModel($this->getDatabaseConnection());
+            $brand = $brandModel->getById($product->brand_id);
+            $this->set('brand', $brand);
 
             $productsInStock = $this->productsInStock($id);
             $this->set('productsInStock', $productsInStock);
@@ -32,6 +37,12 @@
                     'user_agent' => $userAgent
                 ]
             );
+        }
+
+        public function products() {
+            $productModel = new ProductModel($this->getDatabaseConnection());
+            $products = $productModel->showProductsWithBrandAndCategory();
+            $this->set('products', $products);
         }
 
         private function productsInStock($id) {

@@ -28,4 +28,16 @@
 
             $this->set('products', $products);          
         }
+
+        public function brands() {
+            $brandModel = new BrandModel($this->getDatabaseConnection());    
+            $brands = $brandModel->getAll();
+            $this->set('brands', $brands);
+        }
+
+        public function brandProducts(int $brandId) {
+            $brandModel = new BrandModel($this->getDatabaseConnection());    
+            $products = $brandModel->getProductsByBrandId($brandId);
+            $this->set('products', $products);
+        }
     }

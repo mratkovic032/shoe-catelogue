@@ -30,6 +30,20 @@
             return $brands;
         }
 
+        public function getProductsByBrandId(int $brandId): array {
+            $sql = 'SELECT product.*, brand.name AS "brand", category.name AS "category", admin.username AS "admin" FROM 
+                    (brand INNER JOIN (product INNER JOIN category ON product.category_id = category.category_id) ON brand.brand_id = product.brand_id) 
+                    INNER JOIN admin ON product.admin_id = admin.admin_id
+                    WHERE product.brand_id = ?;';
+            $prep = $this->getConnection()->prepare($sql);            
+            $res = $prep->execute([ $brandId ]);
+            $products = [];
+            if ($res) {
+                $products = $prep->fetchAll(\PDO::FETCH_OBJ);
+            }            
+            return $products;
+        }
+
         public function getBrandAndTitleByProductId(int $productId) {
             $sql = 'SELECT brand.name, product.title, product.product_id FROM 
                     product INNER JOIN brand ON product.brand_id = brand.brand_id

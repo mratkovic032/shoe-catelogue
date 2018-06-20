@@ -1,0 +1,19 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+    <h2>{{ products.brand }}</h2>
+    {% for product in products %}
+        <ul>
+            <li>
+            <label><a href="{{ BASE }}product/{{ product.product_id }}">{{ product.brand|escape }} - {{ product.title|escape }}</a></label><br />
+            <img src="{{ BASE }}assets/uploads/{{ product.product_id }}.jpg" alt="Slika - {{ product.title }}">
+            <p>{{ product.description|escape }}</p>
+            <label>Cena: {{ product.price }}</label><br />
+            <label>Kategorija: </label><a href="{{ BASE }}category/{{ product.category_id }}">{{ product.category|escape }}</a>
+        </ul>    
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+{{ product.brand }}
+{% endblock %}
