@@ -13,13 +13,13 @@ Dashboard - Brendovi - Izmena
     <br />
     
     <form method="POST">
-        <div>
+        <div class="form-group">
             <label for="name">Naziv brenda:</label>
-            <input type="text" id="name" name="name" value="{{ brand.name }}" required pattern=".*[^\s]{2,}.*" >
+            <input class="form-control" type="text" id="name" name="name" value="{{ brand.name }}" required pattern=".*[^\s]{2,}.*" >
         </div>
         
-        <div>
-            <button type="submit">Izmeni brend</button>
+        <div class="form-group">
+            <button class="btn" type="submit">Izmeni brend</button>
         </div>
     </form>
 </div>

@@ -13,13 +13,13 @@ Dashboard - Velicine - Izmena
     <br />
     
     <form method="POST">
-        <div>
+        <div class="form-group">
             <label for="size">Velicina:</label>
-            <input type="text" min="1" id="size" name="size" value="{{ size.value }}" required>
+            <input class="form-control" type="text" min="1" id="size" name="size" value="{{ size.value }}" required>
         </div>
         
-        <div>
-            <button type="submit">Izmeni velicinu</button>
+        <div class="form-group">
+            <button class="btn" type="submit">Izmeni velicinu</button>
         </div>
     </form>
 </div>

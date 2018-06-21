@@ -9,66 +9,75 @@ Dashboard - Proizvodi - Dodavanje novog
     <div class="options">
         <a href="{{ BASE }}admin/products">Prikazi sve proizvode</a>
     </div>
-    <br />
+    <br />    
     
     <form method="POST" enctype="multipart/form-data" onsubmit="return validateProduct();">
-        <div>
+        <div class="form-group">
             <label for="category">Kategorija:</label>
-            <select name="category" id="category" required>
-                <option>- - -</option>
-                {% for category in categories %}
-                    <option value="{{ category.category_id }}">{{ category.name|escape }}</option>
-                {% endfor %}
-            </select>
-            <button type="button" data-toggle="modal" data-target="#categoryModal">
-                Dodaj novu kategoriju
-            </button>             
+            <div class="input-group">
+                <select class="form-control" name="category" id="category" required>
+                    <option>- - -</option>
+                    {% for category in categories %}
+                        <option value="{{ category.category_id }}">{{ category.name|escape }}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" class="btn input-group-append" data-toggle="modal" data-target="#categoryModal">
+                    Dodaj novu kategoriju
+                </button>             
+            </div>    
         </div> 
 
-        <div>
+        <div class="form-group">
             <label for="brand">Brend:</label>
-            <select name="brand" id="brand" required>
-                <option>- - -</option>
-                {% for brand in brands %}
-                    <option value="{{ brand.brand_id }}">{{ brand.name|escape }}</option>
-                {% endfor %}
-            </select>
-            <button type="button" data-toggle="modal" data-target="#brandModal">
-                Doddaj novi brend
-            </button> 
+            <div class="input-group">
+                <select class="form-control" name="brand" id="brand" required>
+                    <option>- - -</option>
+                    {% for brand in brands %}
+                        <option value="{{ brand.brand_id }}">{{ brand.name|escape }}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" class="btn input-group-append"  data-toggle="modal" data-target="#brandModal">
+                    Doodaj novi brend
+                </button>
+            </div>    
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="title">Model:</label>
-            <input type="text" id="title" name="title" required><br />
-            <label class="d-none" id="error-title"></label>
+            <input class="form-control" type="text" id="title" name="title" required><br />
+            <small class="d-none" id="error-title"></small>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="description">Opis:</label>            
-            <textarea rows="4" id="description" name="description" required></textarea><br />
-            <label class="d-none" id="error-description"></label>
+            <textarea class="form-control" rows="4" id="description" name="description" required></textarea><br />
+            <small class="d-none" id="error-description"></small>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="material">Materijal:</label>
-            <input type="text" id="material" name="material" required><br />
-            <label class="d-none" id="error-material"></label>
+            <input class="form-control" type="text" id="material" name="material" required><br />
+            <small class="d-none" id="error-material"></small>
         </div>
         
-        <div>
+        <div class="form-group">
             <label for="price">Cena:</label>
-            <input type="number" min="1" step="0.1" id="price" name="price" required>
+            <input class="form-control" type="number" min="1" step="0.1" id="price" name="price" required>
         </div>
 
 
-        <div>
+        <!-- <div class="form-group">
             <label for="image">Slika:</label>
-            <input type="file" id="image" name="image" required accept="image/jpeg, image/png">
+            <input class="form-control-file" type="file" id="image" name="image" required accept="image/jpeg, image/png">
+        </div> -->
+        
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="image" name="image" required accept="image/jpeg, image/png">
+            <label class="custom-file-label" for="image">Izaberite sliku...</label>
         </div>
 
-        <div>
-            <button type="submit">Dodaj proizvod</button>
+        <div class="form-group">
+            <button class="btn" type="submit">Dodaj proizvod</button>
         </div>
     </form>
 
@@ -82,9 +91,11 @@ Dashboard - Proizvodi - Dodavanje novog
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label for="new_color">Unesite novu kategoriju</label>
-                    <input class="form-control" type="text" id="new_category" name="new_category" required><br />
-                    <label class="d-none" id="error-category"></label>
+                    <div class="form-group">
+                        <label for="new_color">Unesite novu kategoriju</label>
+                        <input class="form-control" type="text" id="new_category" name="new_category" required><br />
+                        <small class="d-none" id="error-category"></small>
+                    </div>    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="addCategory();">Dodaj kategorjiu</button>
@@ -104,9 +115,11 @@ Dashboard - Proizvodi - Dodavanje novog
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label for="new_size">Unesite novi brend:</label>
-                    <input class="form-control" type="text" id="new_brand" name="new_brand" required>
-                    <label class="d-none" id="error-brand"></label>
+                    <div class="form-group">
+                        <label for="new_size">Unesite novi brend:</label>
+                        <input class="form-control" type="text" id="new_brand" name="new_brand" required>
+                        <small class="d-none" id="error-brand"></small>
+                    </div>    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="addBrand();">Dodaj brend</button>

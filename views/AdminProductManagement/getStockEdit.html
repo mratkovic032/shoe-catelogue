@@ -14,37 +14,41 @@ Dashboard - Proizvodi - Stanje - Izmena
     <form method="POST">
         <input type="number" id="product_id" name="product_id" value="{{ productVersion.product_id }}" hidden>
         
-        <div>
+        <div class="form-group">
             <label for="color">Boja:</label>
-            <select name="color" id="color">                
-                {% for color in colors %}
-                    <option value="{{ color.color_id }}" {% if color.color_id == productVersion.color_id %} selected {% endif %}>{{ color.name|escape }}</option>
-                {% endfor %}
-            </select>
-            <button type="button" data-toggle="modal" data-target="#colorModal">
-                Dodaj novu boju
-            </button>            
+            <div class="input-group">
+                <select class="form-control" name="color" id="color">                
+                    {% for color in colors %}
+                        <option value="{{ color.color_id }}" {% if color.color_id == productVersion.color_id %} selected {% endif %}>{{ color.name|escape }}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" class="btn input-group-append" data-toggle="modal" data-target="#colorModal">
+                    Dodaj novu boju
+                </button>            
+            </div>    
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="size">Velicina:</label>
-            <select name="size" id="size">
-                {% for size in sizes %}
-                    <option value="{{ size.size_id }}" {% if size.size_id == productVersion.size_id %} selected {% endif %}>{{ size.value|escape }}</option>
-                {% endfor %}
-            </select>             
-            <button type="button" data-toggle="modal" data-target="#sizeModal">
-                Dodaj novu velicinu
-            </button> 
+            <div class="input-group">
+                <select class="form-control" name="size" id="size">
+                    {% for size in sizes %}
+                        <option value="{{ size.size_id }}" {% if size.size_id == productVersion.size_id %} selected {% endif %}>{{ size.value|escape }}</option>
+                    {% endfor %}
+                </select>             
+                <button type="button" class="btn input-group-append" data-toggle="modal" data-target="#sizeModal">
+                    Dodaj novu velicinu
+                </button> 
+            </div>    
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="quantity">Kolicina:</label>
-            <input type="number" min="1" id="quantity" name="quantity" value="{{ productVersion.quantity }}">
+            <input class="form-control" type="number" min="1" id="quantity" name="quantity" value="{{ productVersion.quantity }}">
         </div> 
 
-        <div>
-            <button type="submit">Izmeni proizvod</button>
+        <div class="form-group">
+            <button class="btn" type="submit">Izmeni proizvod</button>
         </div>
     </form>        
 
@@ -58,9 +62,11 @@ Dashboard - Proizvodi - Stanje - Izmena
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label for="new_color">Unesite novu boju</label>
-                    <input class="form-control" type="text" id="new_color" name="new_color" required><br />
-                    <label class="d-none" id="error-color"></label>
+                    <div class="form-group">
+                        <label for="new_color">Unesite novu boju</label>
+                        <input class="form-control" type="text" id="new_color" name="new_color" required><br />
+                        <small class="d-none" id="error-color"></small>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="addColor();">Dodaj boju</button>
@@ -80,9 +86,11 @@ Dashboard - Proizvodi - Stanje - Izmena
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label for="new_size">Unesite novu velicinu:</label>
-                    <input class="form-control" type="number" id="new_size" name="new_size" min="1" required><br />
-                    <label class="d-none" id="error-size"></label>
+                    <div class="form-group">
+                        <label for="new_size">Unesite novu velicinu:</label>
+                        <input class="form-control" type="number" id="new_size" name="new_size" min="1" required><br />
+                        <small class="d-none" id="error-size"></small>
+                    </div>    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="addSize();">Dodaj velicinu</button>

@@ -3,7 +3,17 @@
     color: #aaa;
 }
 */
+header {
+    margin-bottom: 25px;
+}
 .bookmark-card {
     margin: 15px 0;
 }
 
+.custom-file {
+    margin: 40px 0 50px 0;
+}
+
+small {
+    color: #f00;
+}
