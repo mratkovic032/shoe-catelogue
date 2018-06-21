@@ -92,6 +92,7 @@
 
         # Search:
         App\Core\Route::post('|^search/?$|',                             'Search',                  'quickSearch'),
+        App\Core\Route::post('|^filter/?$|',                             'Search',                  'filter'),
 
         App\Core\Route::any('|^.*$|',                               'Main',                         'home')
     ];

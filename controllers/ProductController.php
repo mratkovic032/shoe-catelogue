@@ -5,6 +5,9 @@
     use App\Models\ProductVersionModel;
     use App\Models\ProductViewModel;
     use App\Models\BrandModel;
+    use App\Models\CategoryModel;
+    use App\Models\ColorModel;
+    use App\Models\SizeModel;
     use App\Models\ImageModel;
     use App\Core\Controller;
 
@@ -58,6 +61,22 @@
             }
             
             $this->set('products', $products);            
+
+            $brandModel = new BrandModel($this->getDatabaseConnection());
+            $brands = $brandModel->getAll();
+            $this->set('brands', $brands);
+
+            $colorModel = new ColorModel($this->getDatabaseConnection());
+            $colors = $colorModel->getAll();
+            $this->set('colors', $colors);
+
+            $sizeModel = new SizeModel($this->getDatabaseConnection());
+            $sizes = $sizeModel->getAll();
+            $this->set('sizes', $sizes);
+
+            $categoryModel = new CategoryModel($this->getDatabaseConnection());
+            $categories = $categoryModel->getAll();
+            $this->set('categories', $categories);
         }
 
         private function productsInStock($id) {

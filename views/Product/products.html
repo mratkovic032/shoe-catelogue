@@ -2,6 +2,56 @@
 
 {% block main %}
     <h2>Spisak svih proizvoda:</h2>
+    <form method="POST" action="{{ BASE }}filter" enctype="multipart/form-data" onsubmit="return validateProduct();">        
+        <div>
+            <label for="category">Kategorija:</label>
+            <select name="category" id="category">
+                <option value="">- - -</option>
+                {% for category in categories %}
+                    <option value="{{ category.name }}" {% if category.category_id == product.category_id %} selected {% endif %}>{{ category.name|escape }}</option>
+                {% endfor %}
+            </select>                      
+        </div>
+
+        <div>
+            <label for="brand">Brend:</label>
+            <select name="brand" id="brand">
+                <option value="">- - -</option>
+                {% for brand in brands %}
+                    <option value="{{ brand.name }}" {% if brand.brand_id == product.brand_id %} selected {% endif %}>{{ brand.name|escape }}</option>
+                {% endfor %}
+            </select>                       
+        </div>
+
+        <div>
+            <label for="material">Materijal:</label>
+            <input type="text" id="material" name="material" value="{{ product.material|escape }}">            
+        </div>
+
+        <div>
+            <label for="color">Boja:</label>
+            <select name="color" id="color">
+                <option value="">- - -</option>                
+                {% for color in colors %}
+                    <option value="{{ color.name }}" {% if color.color_id == productVersion.color_id %} selected {% endif %}>{{ color.name|escape }}</option>
+                {% endfor %}
+            </select>                       
+        </div>
+    
+        <div>
+            <label for="size">Velicina:</label>
+            <select name="size" id="size">
+                <option value="">- - -</option>
+                {% for size in sizes %}
+                    <option value="{{ size.value }}" {% if size.size_id == productVersion.size_id %} selected {% endif %}>{{ size.value|escape }}</option>
+                {% endfor %}
+            </select>                         
+        </div>
+
+        <div>
+            <button type="submit">Filtriraj</button>
+        </div>
+    </form>
     {% for product in products %}
         <ul>
             <li>

@@ -34,7 +34,7 @@
             return $products;           
         }
 
-        public function getAllBySearch(string $keywords) {
+        public function getAllByKeyword(string $keywords): array {
             $sql = 'SELECT * FROM product WHERE product.title LIKE ? OR product.description LIKE ?;';
 
             $keywords = '%' . $keywords . '%';
@@ -49,6 +49,16 @@
             }
 
             return $prep->fetchAll(\PDO::FETCH_OBJ);
+        }
+
+        public function getAllByFilter(string $sql): array {
+            $prep = $this->getConnection()->prepare($sql);
+            $res = $prep->execute();
+            $products = [];
+            if ($res) {
+                $products = $prep->fetchAll(\PDO::FETCH_OBJ);
+            }
+            return $products;
         }
 
         public function showWholeProduct(int $productId) {
