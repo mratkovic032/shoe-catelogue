@@ -50,8 +50,13 @@
                                 <li class="nav-item">
                                     <a class="nav-item nav-link" href="{{ BASE }}admin/login">Prijava</a>                  
                                 </li>
-                            {% endif %}                            
+                            {% endif %}
                         </ul>
+                        <!-- <ul class="navbar-nav ml-auto mr-1 mt-2 mt-lg-0">
+                            <li class="nav-item ml-auto">
+                                <a class="nav-item nav-link" href="#">Lista zelja</a>
+                            </li>                                                         
+                        </ul> -->
                         <form method="POST" action="{{ BASE }}search" class="form-inline my-2 my-lg-0">
                             <input class="form-control mr-sm-2" name="search" type="search" placeholder="Kljucne reci" aria-label="Search" required pattern="[^\s]{2,}">
                             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Trazi</button>
