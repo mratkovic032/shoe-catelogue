@@ -39,7 +39,7 @@
             $color = filter_input(INPUT_POST, 'color', FILTER_SANITIZE_STRING);
             $size = filter_input(INPUT_POST, 'size', FILTER_SANITIZE_NUMBER_INT);
 
-            $sql = 'SELECT DISTINCT product.product_id, product.title, product.description FROM 
+            $sql = 'SELECT DISTINCT brand.path_small, product.product_id, product.price, product.title, product.description FROM 
             (((product INNER JOIN brand ON product.brand_id = brand.brand_id) INNER JOIN category ON product.category_id = category.category_id) INNER JOIN admin ON product.admin_id = admin.admin_id) INNER JOIN 
             ((product_version INNER JOIN color ON product_version.color_id = color.color_id) INNER JOIN size ON product_version.size_id = size.size_id) ON product.product_id = product_version.product_id WHERE ';
 

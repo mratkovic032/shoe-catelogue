@@ -1,19 +1,21 @@
 {% extends "_global/index.html" %}
 
 {% block main %}
-    <h2>{{ category.name|escape }} - {{ brand.name|escape }}</h2>
-    <p>Spisak proizvoda:</p>
-    {% for product in products %}
-        <ul>
-            <li>
-            <a href="{{ BASE }}product/{{ product.product_id }}">
-                {{ product.title|escape }}              
-            </a><br />
-            <img src="{{ BASE }}assets/uploads/{{ product.path }}" alt="Slika - {{ product.title }}">
-            <p>{{ product.description|escape }}</p>
-            <label>Cena: {{ product.price }}</label>
-        </ul>    
-    {% endfor %}
+    <h2 class="text-center page-title">{{ category.name|escape }} - {{ brand.name|escape }}</h2><br />
+    <div class="row">
+        {% for product in products %}
+            <div class="card card-product bg-transparent col-12 col-sm-6 col-md-4 col-lg-4">
+                <img class="card-img-top" src="{{ BASE }}assets/uploads/{{ product.path }}" alt="Slika - {{ product.title }}">
+                <div class="card-body">
+                    <img class="logo_small" src="{{ BASE }}assets/img/logo/{{ brand.path_small }}" alt="Brand logo">
+                    <h5 class="card-title">
+                        <a class="products-title" href="{{ BASE }}product/{{ product.product_id }}">{{ product.title|escape }}</a>
+                    </h5>
+                    <label>{{ product.price }} din.</label>
+                </div>
+            </div>   
+        {% endfor %}
+    </div> 
 {% endblock %}
 
 {% block title %}

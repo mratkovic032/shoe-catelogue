@@ -1,15 +1,18 @@
 {% extends "_global/index.html" %}
 
 {% block main %}
-    <h2>Brendovi</h2>
+<div class="row">
     {% for brand in brands %}
-        <ul>
-            <li>
-            <a href="{{ BASE }}brand/{{ brand.brand_id }}">
-                {{ brand.name|escape }}              
-            </a>
-        </ul>    
+        <div class="card list-cards bg-transparent col-12 col-sm-6 col-md-4 col-lg-3 text-center">
+            <img class="card-img-top" src="{{ BASE }}assets/img/logo/{{ brand.path }}" alt="Card image">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ BASE }}brand/{{ brand.brand_id }}">{{ brand.name|escape }}</a>
+                </h5>                
+            </div>
+        </div>   
     {% endfor %}
+</div>    
 {% endblock %}
 
 {% block title %}

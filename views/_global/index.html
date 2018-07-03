@@ -4,21 +4,23 @@
         <title>SC - {% block title %}Pocetna{% endblock %}</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="{{ BASE }}assets/libs/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ BASE }}assets/libs/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ BASE }}assets/libs/animate.css/animate.min.css">
         <link rel="stylesheet" href="{{ BASE }}assets/css/main.css">
     </head>
 
     <body>        
         <div class="container">
             <header>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col col-sm text-center">
                         <a href="{{ BASE }}" class="banner">
                             <img src="#" alt="Banner 1">
                         </a>
                     </div>
-                </div>
+                </div> -->
                 
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <nav class="navbar navbar-expand-lg">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                           <span class="navbar-toggler-icon"></span>
                     </button>
@@ -39,10 +41,7 @@
                             {% if sessionAdminId > 0 %}
                                 <li class="nav-item">
                                     <a class="nav-item nav-link" href="{{ BASE }}admin/dashboard">Dashboard</a>                  
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-item nav-link" href="{{ BASE }}admin/profile">Profile</a>
-                                </li>
+                                </li>                            
                                 <li class="nav-item">
                                     <a class="nav-item nav-link" href="{{ BASE }}admin/logout">Odjava</a>                  
                                 </li>
@@ -52,15 +51,23 @@
                                 </li>
                             {% endif %}
                         </ul>
-                        <!-- <ul class="navbar-nav ml-auto mr-1 mt-2 mt-lg-0">
+                        <!-- <ul class="navbar-nav ml-auto mr-3 mt-2 mt-lg-0">
                             <li class="nav-item ml-auto">
-                                <a class="nav-item nav-link" href="#">Lista zelja</a>
+                                <i class="fa fa-heart-o"></i>
                             </li>                                                         
                         </ul> -->
                         <form method="POST" action="{{ BASE }}search" class="form-inline my-2 my-lg-0">
                             <input class="form-control mr-sm-2" name="search" type="search" placeholder="Kljucne reci" aria-label="Search" required pattern="[^\s]{2,}">
-                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Trazi</button>
-                        </form>
+                            <button class="btn my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>                            
+                        </form>                        
+                        <div id="wishlist-div" class="dropdown my-2 my-sm-0 ml-2" data-toggle="tooltip" data-placement="right" title="Lista zelja">
+                            <button class="btn my-2 my-sm-0 dropdown-toggle animated" type="button" id="wishlist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-heart-o"></i>
+                            </button>                            
+                            <div class="dropdown-menu bookmarks" aria-labelledby="wishlist">
+                                <a>Ucitavam listu zelja...</a>
+                            </div>
+                          </div>
                     </div>
                 </nav> 
             </header>                       
@@ -70,18 +77,21 @@
                 {% endblock %}
             </main>
 
-            <div class="card bookmark-card">
-                <div class="bookmarks card-body">Loading bookmarks...</div>
-            </div> 
-
-            <footer class="text-center">
+            <!-- <footer class="text-center">
                 &copy; 2018 -  Milos Ratkovic
-            </footer>
+            </footer> -->
+
+            <div class="alert alert-warning alert-dismissible fade wishlist-alert" role="alert" id="success-wishlist">
+                Proizvod je uspesno dodat u listu zelja!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         </div>    
 
         <script>const BASE = '{{ BASE }}';</script>
         <script src="{{ BASE }}assets/libs/jquery/dist/jquery.min.js"></script>
-        <script src="{{ BASE }}assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="{{ BASE }}assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="{{ BASE }}assets/js/bookmark.js"></script>  
         <script src="{{ BASE }}assets/js/main.js"></script>                        
     </body>

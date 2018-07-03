@@ -90,7 +90,7 @@
         }
 
         public function showProductsWithBrandAndCategory(): array {
-            $sql = 'SELECT product.*, brand.name AS "brand", category.name AS "category", admin.username AS "admin" FROM 
+            $sql = 'SELECT product.*, brand.name AS "brand", brand.path_small, category.name AS "category", admin.username AS "admin" FROM 
                     (brand INNER JOIN (product INNER JOIN category ON product.category_id = category.category_id) ON brand.brand_id = product.brand_id) 
                     INNER JOIN admin ON product.admin_id = admin.admin_id ORDER BY product.price;';
             $prep = $this->getConnection()->prepare($sql);            

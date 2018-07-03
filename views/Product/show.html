@@ -1,26 +1,36 @@
 {% extends "_global/index.html" %}
 
 {% block main %}
-    <a href="#" onclick="addBookmark({{ product.product_id }});">Dodaj u bookmark</a>
-    <h2>{{ brand.name }} - {{ product.title|escape }}</h2>
-    <img src="{{ BASE }}assets/uploads/{{ image.path }}" alt="Slika - {{ image.title }}">
-    <p>{{ product.description|escape }}</p>    
-    <p>Cena: {{ product.price }} din.</p>    
-    <p>Materijal: {{ product.material|escape }}</p>
-    <p>Raspolozive velicine i boje:</p>
-    {% if productsInStock is empty %}
-        <br />
-        <p>Nema na stanju</p>
-    {% else %}
-        {% for stockProduct in productsInStock %}
-            <ul>
-                <li>
-                    Velicina: {{ stockProduct.size }}<br />
-                    Boja: {{ stockProduct.color }}<br />
-                    Na stanju: {{ stockProduct.quantity }}            
-            </ul>
-        {% endfor %}
-    {% endif %}    
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <img class="img-fluid" src="{{ BASE }}assets/img/shoe/{{ image.path_big }}" alt="Slika - {{ image.title }}">
+        </div>
+        <div class="col-md-6 col-sm-12 text-right product-info">
+            <h2 class="product-title">{{ brand.name }} - {{ product.title|escape }}</h2>
+            <p>{{ product.description|escape }}</p> 
+            <label class="product-price">{{ product.price }} din.</label>
+            <p>{{ product.material|escape }}</p>
+            <p>Raspolozive velicine i boje:</p>
+            <div class="container">
+                <div class="row justify-content-end text-center">
+                    {% if productsInStock is empty %}                           
+                        <p class="out-of-stock">Trenutno nemamo na stanju <i class="fa fa-frown-o" aria-hidden="true"></i></p>                           
+                    {% else %}
+                    {% for stockProduct in productsInStock %}
+                        <div class="col-3 col-sm-2 col-md-3 col-lg-2 stock-div">                    
+                            <p>{{ stockProduct.size }}</p>
+                            <p>{{ stockProduct.color }}</p>
+                            <p>{{ stockProduct.quantity }} kom.</p>     
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <button class="btn wishlist-button" type="button" onclick="addBookmark({{ product.product_id }});"><i class="fa fa-plus"></i> Dodaj u listu zelja</button>
+        </div>    
+    </div>  
+</div>
 {% endblock %}
 
 {% block title %}
