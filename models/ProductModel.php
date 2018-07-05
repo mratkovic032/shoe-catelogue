@@ -19,7 +19,7 @@
                 'material'          => new Field((new StringValidator())->setMaxLength(255)),
                 'category_id'       => new Field((new NumberValidator())->setIntegerLength(10)),
                 'brand_id'          => new Field((new NumberValidator())->setIntegerLength(10)),
-                'admin_id'          => new Field((new NumberValidator())->setIntegerLength(10))                
+                'admin_id'          => new Field((new NumberValidator())->setIntegerLength(10))
             ];
         }
         
@@ -51,7 +51,37 @@
             return $prep->fetchAll(\PDO::FETCH_OBJ);
         }
 
-        public function getAllByFilter(string $sql): array {
+        public function getAllByFilter(string $category, string $brand, string $material, string $color, string $size): array {
+            $sql = 'SELECT DISTINCT brand.path_small, product.product_id, product.price, product.title, product.description FROM 
+            (((product INNER JOIN brand ON product.brand_id = brand.brand_id) INNER JOIN category ON product.category_id = category.category_id) INNER JOIN admin ON product.admin_id = admin.admin_id) INNER JOIN 
+            ((product_version INNER JOIN color ON product_version.color_id = color.color_id) INNER JOIN size ON product_version.size_id = size.size_id) ON product.product_id = product_version.product_id WHERE ';
+
+            $conditions = [];
+
+            if ($material !== "-") {
+                $conditions[] = "material LIKE '%$material%'";
+            }
+
+            if ($category !== "-") {                
+                $conditions[] = "category.name = '$category'";
+            }
+
+            if ($brand !== "-") {               
+                $conditions[] = "brand.name = '$brand'";
+            }
+
+            if ($color !== "-") {
+                $conditions[] = "color.name = '$color'";
+            }
+
+            if ($size !== "-") {
+                $conditions[] = "size.value = '$size'";
+            }
+
+            $sql .= implode(" AND ", $conditions) . ";";
+            // var_dump($sql);  
+
+
             $prep = $this->getConnection()->prepare($sql);
             $res = $prep->execute();
             $products = [];
