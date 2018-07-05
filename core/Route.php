@@ -30,7 +30,8 @@
             if (!preg_match('/^' . $this->requestMethod . '$/', $method)) {
                 return false;
             }
-
+            // var_dump($this->pattern);
+            // var_dump($url);
             return boolval (preg_match($this->pattern, $url));
         }
 
@@ -53,6 +54,16 @@
             if (isset($matches[2])) {
                 array_push($arguments, $matches[2][0]);
             }
+            if (isset($matches[3])) {
+                array_push($arguments, $matches[3][0]);
+            }
+            if (isset($matches[4])) {
+                array_push($arguments, $matches[4][0]);
+            }
+            if (isset($matches[5])) {
+                array_push($arguments, $matches[5][0]);
+            }
+            // var_dump($arguments);
 
             return $arguments;
         }

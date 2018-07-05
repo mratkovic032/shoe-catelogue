@@ -1,0 +1,73 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+<h2 class="text-center page-title">O nama</h2><br />
+<div class="row">
+    <div class="col-md-12">
+        <p>Nasa firma je osnovana 2016 godine i od tada uspesno poslujemo na teritoriji Beograda gde posedujemo maloprodajno mesto u Danijelovoj 32, koje mozete posetiti svakog radnog dana od 09h do 22h i subotom od 10h do 19h. Bavimo se uvozom i  distribucijom, prodajom raznih vrsta obuce, od patika preko cizmi do cipela i ostalo...</p>
+        <p>Imamo ugovore sa najpoznatijim firmama i brendovima sveta kao sto su Nike, Adidas, Timberland, Paciotti i mnogi drugi. Za vas nabavljamo samo najbolje sto isti mogu da ponude! Nas kompletan katalog mozete pogledati <a class="about-us-link" href="{{ BASE }}products">OVDE</a>.</p>
+    </div>
+</div>
+<div class="row contact-row">
+        <div class="col-lg-6 contact-info">                            
+            <table class="table table-sm table-bordered table-hover">            
+                <tbody>
+                    <tr class="wow fadeIn" data-wow-delay="0.2s">                    
+                        <td rowspan="2" class="align-middle table-headings">KONTAKT TELEFON</td>
+                        <td><a href="tel:+381115677653">+381 11 56 77 653</a></td> 
+                    </tr>                                    
+                    <tr class="wow fadeIn" data-wow-delay="0.3s">
+                        <td><a href="tel:+381116734990">+381 11 67 34 990</a></td>
+                    </tr>
+                    <tr class="wow fadeIn" data-wow-delay="0.4s">                    
+                        <td class="align-middle table-headings">ADRESA</td>
+                        <td><a id="address-button" href="#googleMap" data-toggle="tooltip" data-placement="right" title="Prikazi na mapi">Danijelova 32, Beograd</a></td>
+                    </tr>
+                    <tr class="wow fadeIn" data-wow-delay="0.5s">                    
+                        <td class="table-headings">EMAIL</td>
+                        <td><a href="mailto:contrapuntobg@gmail.com">office@singiobuca.rs</a></td>
+                    </tr>
+                    <tr class="wow fadeIn" data-wow-delay="0.6s">
+                        <td rowspan="2" class="align-middle table-headings">RADNO VREME</td>
+                        <td>Ponedeljak - Petak: 09 - 22 h</td>
+                    </tr>
+                    <tr class="wow fadeIn" data-wow-delay="0.7s">
+                        <td>Subota: 10 - 19 h</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <form action="php/send-email.php" method="POST" class="email-form wow fadeIn" data-wow-delay="0.3s">
+                <div class="form-row">
+                    <div class="form-group col-md-6">                                    
+                        <input type="text" class="form-control" placeholder="Ime (obavezno polje)" required> 
+                    </div>
+                    <div class="form-group col-md-6">                                        
+                        <input type="email" name="email" class="form-control" placeholder="Email (obavezno polje)" required>
+                    </div>
+                </div>
+                <div class="form-group">                                    
+                    <input type="text" class="form-control" placeholder="Naslov">
+                </div>
+                <div class="form-group">                                    
+                    <textarea rows="3" class="form-control" placeholder="Sadrzaj"></textarea>
+                </div>
+                <div class="form-group">
+                    <button id="send-email-btn" class="btn wow fadeInRightBig" data-wow-delay="0.5s" type="submit">Posalji</button>
+                </div>
+            </form>
+        </div>
+    </div>
+<script src="{{ BASE }}assets/js/googleMap.js"></script> 
+<div class="row">
+    <div class="col-md-12">
+        <div id="googleMap"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyActSfCnu_xbjHxM9NjZwTXgL6t4SPFp3I&callback=myMap"></script>
+    </div>
+</div>
+{% endblock %}
+
+{% block title %}
+Kontakt
+{% endblock %}

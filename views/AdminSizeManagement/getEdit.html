@@ -5,22 +5,34 @@ Dashboard - Velicine - Izmena
 {% endblock %}
 
 {% block main %}
-<div>
-    <div class="options">
-        <a href="{{ BASE }}admin/sizes/add">Dodaj novu velicinu</a><br />
-        <a href="{{ BASE }}admin/sizes">Prikazi sve velicine</a>
+<h2 class="text-center page-title dashboard-title">Dashboard</h2>
+<div class="row">
+    <div class="col-lg-3 col-md-12 col-sm-12">
+        <div class="list-group">
+            <a href="{{ BASE }}admin/categories" class="list-group-item list-group-item-action">Kategorije</a>
+            <a href="{{ BASE }}admin/brands" class="list-group-item list-group-item-action">Brendovi</a>
+            <a href="{{ BASE }}admin/products" class="list-group-item list-group-item-action">Proizvodi</a>
+            <a href="{{ BASE }}admin/colors" class="list-group-item list-group-item-action">Boje</a>
+            <a href="{{ BASE }}admin/sizes" class="list-group-item list-group-item-action active">Velicine</a>
+        </div>
     </div>
-    <br />
-    
-    <form method="POST">
-        <div class="form-group">
-            <label for="size">Velicina:</label>
-            <input class="form-control" type="text" min="1" id="size" name="size" value="{{ size.value }}" required>
+
+    <div class="col-lg-9 col-md-12 col-sm-12">
+        <div class="options">        
+            <a href="{{ BASE }}admin/sizes"><i class="fa fa-arrow-left"></i></a>
         </div>
+        <br />
         
-        <div class="form-group">
-            <button class="btn" type="submit">Izmeni velicinu</button>
-        </div>
-    </form>
+        <form method="POST">
+            <div class="form-group">
+                <label for="size">Velicina:</label>
+                <input class="form-control" type="text" min="1" id="size" name="size" value="{{ size.value }}" required>
+            </div>
+            
+            <div class="form-group">
+                <button class="btn" type="submit">Izmeni velicinu</button>
+            </div>
+        </form>                                 
+    </div>
 </div>
 {% endblock %}

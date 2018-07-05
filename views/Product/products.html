@@ -1,72 +1,85 @@
 {% extends "_global/index.html" %}
 
 {% block main %}
-    <h2 class="text-center page-title">Svi proizvodi:</h2><br />
-    <div class="row">
-        <div class="col-md-3 col-sm-12 filter-div">
-            <form method="POST" action="{{ BASE }}filter" enctype="multipart/form-data" onsubmit="return validateProduct();">        
-                <div class="form-group">
-                    <select class="form-control"  name="category" id="category">
-                        <option value="">Kategorija</option>
-                        {% for category in categories %}
-                            <option value="{{ category.name }}" {% if category.category_id == product.category_id %} selected {% endif %}>{{ category.name|escape }}</option>
-                        {% endfor %}
-                    </select>                      
+    <h2 class="text-center page-title">Svi proizvodi</h2><br />
+   
+    <div class="filter-div">                       
+        <form method="POST" action="{{ BASE }}filter" onsubmit="return false;">
+            <div class="form-row">
+                <div class="col-lg col-sm-4">                    
+                    <div class="form-group">
+                        <select class="form-control"  name="category" id="category">
+                            <option value="">Kategorija</option>
+                            {% for category in categories %}
+                                <option value="{{ category.name }}" {% if category.category_id == product.category_id %} selected {% endif %}>{{ category.name|escape }}</option>
+                            {% endfor %}
+                        </select>                      
+                    </div>
+                </div>    
+
+                <div class="col-lg col-sm-4">
+                    <div class="form-group">
+                        <select class="form-control"  name="brand" id="brand">
+                            <option value="">Brend</option>
+                            {% for brand in brands %}
+                                <option value="{{ brand.name }}" {% if brand.brand_id == product.brand_id %} selected {% endif %}>{{ brand.name|escape }}</option>
+                            {% endfor %}
+                        </select>                       
+                    </div>
+                </div>    
+
+                <div class="col-lg col-sm-4">
+                    <div class="form-group">
+                        <input class="form-control"  type="text" id="material" name="material" placeholder="Materijal" pattern="^[a-zA-Z]{2,}">            
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <select class="form-control"  name="brand" id="brand">
-                        <option value="">Brend</option>
-                        {% for brand in brands %}
-                            <option value="{{ brand.name }}" {% if brand.brand_id == product.brand_id %} selected {% endif %}>{{ brand.name|escape }}</option>
-                        {% endfor %}
-                    </select>                       
-                </div>
-
-                <div class="form-group">
-                    <input class="form-control"  type="text" id="material" name="material" value="{{ product.material|escape }}" placeholder="Materijal">            
-                </div>
-
-                <div class="form-group">
-                    <select class="form-control"  name="color" id="color">
-                        <option value="">Boja</option>                
-                        {% for color in colors %}
-                            <option value="{{ color.name }}" {% if color.color_id == productVersion.color_id %} selected {% endif %}>{{ color.name|escape }}</option>
-                        {% endfor %}
-                    </select>                       
+                <div class="col-lg col-sm-4">
+                    <div class="form-group">
+                        <select class="form-control"  name="color" id="color">
+                            <option value="">Boja</option>                
+                            {% for color in colors %}
+                                <option value="{{ color.name }}" {% if color.color_id == productVersion.color_id %} selected {% endif %}>{{ color.name|escape }}</option>
+                            {% endfor %}
+                        </select>                       
+                    </div>
                 </div>
             
-                <div class="form-group">
-                    <select class="form-control"  name="size" id="size">
-                        <option value="">Velicina</option>
-                        {% for size in sizes %}
-                            <option value="{{ size.value }}" {% if size.size_id == productVersion.size_id %} selected {% endif %}>{{ size.value|escape }}</option>
-                        {% endfor %}
-                    </select>                         
+                <div class="col-lg col-sm-4">
+                    <div class="form-group">
+                        <select class="form-control"  name="size" id="size">
+                            <option value="">Velicina</option>
+                            {% for size in sizes %}
+                                <option value="{{ size.value }}" {% if size.size_id == productVersion.size_id %} selected {% endif %}>{{ size.value|escape }}</option>
+                            {% endfor %}
+                        </select>                         
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <button class="btn btn-block" type="submit">Filtriraj</button>
+                <div class="col-lg col-sm-4">
+                    <div class="form-group">
+                        <button class="btn btn-block" type="button" onclick="getSearch();">Filtriraj</button>
+                    </div>
                 </div>
-            </form>
-        </div>
-        <div class="col-md-9 col-sm-12">
-            <div class="row">
-                {% for product in products %}
-                    <div class="card card-product bg-transparent col-12 col-sm-12 col-md-6 col-lg-4">
-                        <img class="card-img-top" src="{{ BASE }}assets/uploads/{{ product.path }}" alt="Slika - {{ product.title }}">
-                        <div class="card-body">
-                            <img class="logo_small" src="{{ BASE }}assets/img/logo/{{ product.path_small }}" alt="Brand logo">
-                            <h5 class="card-title">
-                                <a class="products-title" href="{{ BASE }}product/{{ product.product_id }}">{{ product.title|escape }}</a>
-                            </h5>
-                            <label>{{ product.price }} din.</label>
-                        </div>
-                    </div>   
-                {% endfor %}
             </div>
-        </div>    
+        </form>
     </div>
+    
+    <div class="row all-product-div">
+        {% for product in products %}
+            <div class="card card-product bg-transparent col-12 col-sm-12 col-md-6 col-lg-3">
+                <img class="card-img-top" src="{{ BASE }}assets/uploads/{{ product.path }}" alt="Slika - {{ product.title }}">
+                <div class="card-body">
+                    <img class="logo_small" src="{{ BASE }}assets/img/logo/{{ product.path_small }}" alt="Brand logo">
+                    <h5 class="card-title">
+                        <a class="products-title" href="{{ BASE }}product/{{ product.product_id }}">{{ product.title|escape }}</a>
+                    </h5>
+                    <label>{{ product.price }} din.</label>
+                </div>
+            </div>   
+        {% endfor %}  
+    </div>
+    <script src="{{ BASE }}assets/js/search.js"></script>  
 {% endblock %}
 
 {% block title %}

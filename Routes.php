@@ -13,7 +13,8 @@
         App\Core\Route::get('|^product/([0-9]+/?)$|',                   'Product',                      'show'),
         App\Core\Route::get('|^category/([0-9]+)/brand/([0-9]+/?)$|',   'Brand',                        'show'),
         App\Core\Route::get('|^brand/([0-9]+/?)$|',                     'Brand',                        'brandProducts'),
-        App\Core\Route::get('|^brands/?$|',                             'Brand',                        'brands'),    
+        App\Core\Route::get('|^brands/?$|',                             'Brand',                        'brands'),
+        App\Core\Route::get('|^contact/?$|',                            'Contact',                      'show'),    
 
         # Admin role routes:
             App\Core\Route::get('|^admin/dashboard/?$|',                        'AdminDashboard',               'index'),
@@ -67,6 +68,9 @@
             App\Core\Route::post('|^admin/sizes/add/?$|',                       'AdminSizeManagement',       'postAdd'),
 
         # API routes:
+
+            #Products:
+            App\Core\Route::get('@^api/filter/(-|[a-zA-Z]+|[a-zA-Z]+ [a-zA-Z]+)/(-|[a-zA-Z]+|[a-zA-Z]+ [a-zA-Z]+)/(-|[a-zA-Z]+|[a-zA-Z]+ [a-zA-Z]+)/(-|[a-zA-Z]+|[a-zA-Z]+ [a-zA-Z]+)/(-|[0-9]+)/?$@',  'ApiSearch',     'filter'),
 
             # Bookmarks:
             App\Core\Route::get('|^api/product/([0-9]+)/?$|',           'ApiProduct',                   'show'),

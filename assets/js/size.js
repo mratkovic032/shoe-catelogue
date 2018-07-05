@@ -9,7 +9,7 @@ function getSizes() {
 function addSize() {
     const newSize = document.querySelector('#new_size').value;
     if (newSize < 16 || newSize > 55) {
-        document.querySelector('#error-size').innerHTML = 'Velicina biti vrednost izmedju 16 i 55';
+        document.querySelector('#error-size').innerHTML = 'Velicina mora biti vrednost izmedju 16 i 55';
         document.querySelector('#error-size').classList.remove('d-none');
         return;
     }

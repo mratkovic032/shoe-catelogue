@@ -5,102 +5,115 @@ Dashboard - Proizvodi - Stanje - Izmena
 {% endblock %}
 
 {% block main %}
-<div>
-    <div class="options">
-        <a href="{{ BASE }}admin/products/stock/{{ productVersion.product_id }}">Vrati se nazad</a>
+<h2 class="text-center page-title dashboard-title">Dashboard</h2>
+<div class="row">
+    <div class="col-lg-3 col-md-12 col-sm-12">
+        <div class="list-group">
+            <a href="{{ BASE }}admin/categories" class="list-group-item list-group-item-action">Kategorije</a>
+            <a href="{{ BASE }}admin/brands" class="list-group-item list-group-item-action">Brendovi</a>
+            <a href="{{ BASE }}admin/products" class="list-group-item list-group-item-action active">Proizvodi</a>
+            <a href="{{ BASE }}admin/colors" class="list-group-item list-group-item-action">Boje</a>
+            <a href="{{ BASE }}admin/sizes" class="list-group-item list-group-item-action">Velicine</a>
+        </div>
     </div>
-    <br />
-    
-    <form method="POST">
-        <input type="number" id="product_id" name="product_id" value="{{ productVersion.product_id }}" hidden>
+
+    <div class="col-lg-9 col-md-12 col-sm-12">                        
+        <div class="options">
+            <a href="{{ BASE }}admin/products/stock/{{ productVersion.product_id }}"><i class="fa fa-arrow-left"></i></a>
+        </div>
+        <br />
         
-        <div class="form-group">
-            <label for="color">Boja:</label>
-            <div class="input-group">
-                <select class="form-control" name="color" id="color">                
-                    {% for color in colors %}
-                        <option value="{{ color.color_id }}" {% if color.color_id == productVersion.color_id %} selected {% endif %}>{{ color.name|escape }}</option>
-                    {% endfor %}
-                </select>
-                <button type="button" class="btn input-group-append" data-toggle="modal" data-target="#colorModal">
-                    Dodaj novu boju
-                </button>            
-            </div>    
-        </div>
-
-        <div class="form-group">
-            <label for="size">Velicina:</label>
-            <div class="input-group">
-                <select class="form-control" name="size" id="size">
-                    {% for size in sizes %}
-                        <option value="{{ size.size_id }}" {% if size.size_id == productVersion.size_id %} selected {% endif %}>{{ size.value|escape }}</option>
-                    {% endfor %}
-                </select>             
-                <button type="button" class="btn input-group-append" data-toggle="modal" data-target="#sizeModal">
-                    Dodaj novu velicinu
-                </button> 
-            </div>    
-        </div>
-
-        <div class="form-group">
-            <label for="quantity">Kolicina:</label>
-            <input class="form-control" type="number" min="1" id="quantity" name="quantity" value="{{ productVersion.quantity }}">
-        </div> 
-
-        <div class="form-group">
-            <button class="btn" type="submit">Izmeni proizvod</button>
-        </div>
-    </form>        
-
-    <div class="modal fade" id="colorModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Dodavanje nove boje</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="new_color">Unesite novu boju</label>
-                        <input class="form-control" type="text" id="new_color" name="new_color" required><br />
-                        <small class="d-none" id="error-color"></small>
+        <form method="POST">
+            <input type="number" id="product_id" name="product_id" value="{{ productVersion.product_id }}" hidden>
+            
+            <div class="form-group">
+                <label for="color">Boja:</label>
+                <div class="input-group">
+                    <select class="form-control" name="color" id="color">                
+                        {% for color in colors %}
+                            <option value="{{ color.color_id }}" {% if color.color_id == productVersion.color_id %} selected {% endif %}>{{ color.name|escape }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="button" class="btn input-group-append" data-toggle="modal" data-target="#colorModal">
+                        Dodaj novu boju
+                    </button>            
+                </div>    
+            </div>
+    
+            <div class="form-group">
+                <label for="size">Velicina:</label>
+                <div class="input-group">
+                    <select class="form-control" name="size" id="size">
+                        {% for size in sizes %}
+                            <option value="{{ size.size_id }}" {% if size.size_id == productVersion.size_id %} selected {% endif %}>{{ size.value|escape }}</option>
+                        {% endfor %}
+                    </select>             
+                    <button type="button" class="btn input-group-append" data-toggle="modal" data-target="#sizeModal">
+                        Dodaj novu velicinu
+                    </button> 
+                </div>    
+            </div>
+    
+            <div class="form-group">
+                <label for="quantity">Kolicina:</label>
+                <input class="form-control" type="number" min="1" id="quantity" name="quantity" value="{{ productVersion.quantity }}">
+            </div> 
+    
+            <div class="form-group">
+                <button class="btn" type="submit">Izmeni proizvod</button>
+            </div>
+        </form>        
+    
+        <div class="modal fade" id="colorModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Dodavanje nove boje</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="new_color">Unesite novu boju</label>
+                            <input class="form-control" type="text" id="new_color" name="new_color" required><br />
+                            <small class="d-none" id="error-color"></small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" onclick="addColor();">Dodaj boju</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="addColor();">Dodaj boju</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="sizeModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Dodavanje nove velicine</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="new_size">Unesite novu velicinu:</label>
+                            <input class="form-control" type="number" id="new_size" name="new_size" min="1" required><br />
+                            <small class="d-none" id="error-size"></small>
+                        </div>    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" onclick="addSize();">Dodaj velicinu</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
+                    </div>
                 </div>
             </div>
         </div>
+    
+        <script src="{{ BASE }}assets/js/color.js"></script>
+        <script src="{{ BASE }}assets/js/size.js"></script>                
     </div>
-
-    <div class="modal fade" id="sizeModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Dodavanje nove velicine</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="new_size">Unesite novu velicinu:</label>
-                        <input class="form-control" type="number" id="new_size" name="new_size" min="1" required><br />
-                        <small class="d-none" id="error-size"></small>
-                    </div>    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="addSize();">Dodaj velicinu</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Izadji</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="{{ BASE }}assets/js/color.js"></script>
-    <script src="{{ BASE }}assets/js/size.js"></script>
 </div>
 {% endblock %}

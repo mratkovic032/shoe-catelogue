@@ -1,0 +1,16 @@
+{% extends "_global/index.html" %}
+
+{% block title %}
+Dashboard - Brendovi - Poruka
+{% endblock %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}admin/brands">Prikazi sve brendove</a>
+    </div>
+    <br />
+    
+    <p>{{ message|escape }}</p>
+</div>
+{% endblock %}

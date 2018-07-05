@@ -5,42 +5,53 @@ Dashboard - Proizvodi
 {% endblock %}
 
 {% block main %}
-<div>
-    <h2>Proizvodi</h2>
-    <div class="options">
-        <a href="{{ BASE }}admin/products/add">Dodaj novi proizvod</a>
+<h2 class="text-center page-title dashboard-title">Dashboard</h2>
+<div class="row">
+    <div class="col-lg-3 col-md-12 col-sm-12">
+        <div class="list-group">
+            <a href="{{ BASE }}admin/categories" class="list-group-item list-group-item-action">Kategorije</a>
+            <a href="{{ BASE }}admin/brands" class="list-group-item list-group-item-action">Brendovi</a>
+            <a href="{{ BASE }}admin/products" class="list-group-item list-group-item-action active">Proizvodi</a>
+            <a href="{{ BASE }}admin/colors" class="list-group-item list-group-item-action">Boje</a>
+            <a href="{{ BASE }}admin/sizes" class="list-group-item list-group-item-action">Velicine</a>
+        </div>
     </div>
-    <br />
-    <div class="products table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Kategorija</th>
-                    <th>Brend</th>
-                    <th>Model</th>                    
-                    <th>Opis</th>
-                    <th>Materijal</th>                                    
-                    <th>Cena</th>
-                    <th>Uneo</th>
-                    <th>Opcija</th>                    
-                </tr>
-            </thead>
 
-            <tbody>
-                {% for product in productsWithBrandAndCategory %}
-                <tr>
-                    <td>{{ product.category }}</td>
-                    <td>{{ product.brand|escape }}</td>
-                    <td>{{ product.title|escape }}</td>                    
-                    <td>{{ product.description|escape }}</td> 
-                    <td>{{ product.material|escape }}</td>                                       
-                    <td>{{ product.price }}</td>
-                    <td>{{ product.admin }}</td>
-                    <td><a href="{{ BASE }}admin/products/stock/{{ product.product_id }}">Stanje</a> / <a href="{{ BASE }}admin/products/edit/{{ product.product_id }}">Izmeni</a></td>
-                </tr>
-                {% endfor %}                
-            </tbody>
-        </table>
+    <div class="col-lg-9 col-md-12 col-sm-12 text-center">                        
+        <div class="products table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Kategorija</th>
+                        <th>Brend</th>
+                        <th>Model</th>                    
+                        <!-- <th>Opis</th>
+                        <th>Materijal</th>                                     -->
+                        <th>Cena</th>
+                        <th>Uneo</th>
+                        <th>Opcija</th>                    
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    {% for product in productsWithBrandAndCategory %}
+                    <tr>
+                        <td>{{ product.category }}</td>
+                        <td>{{ product.brand|escape }}</td>
+                        <td>{{ product.title|escape }}</td>                    
+                        <!-- <td>{{ product.description|escape }}</td> 
+                        <td>{{ product.material|escape }}</td>                                        -->
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.admin }}</td>
+                        <td><a href="{{ BASE }}admin/products/stock/{{ product.product_id }}">Stanje</a> / <a href="{{ BASE }}admin/products/edit/{{ product.product_id }}">Izmeni</a></td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="6"><a href="{{ BASE }}admin/products/add">Dodaj novi proizvod</a></td>
+                    </tr>                
+                </tbody>
+            </table>
+        </div>               
     </div>
 </div>
 {% endblock %}

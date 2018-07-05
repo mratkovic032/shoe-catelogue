@@ -5,32 +5,43 @@ Dashboard - Boje
 {% endblock %}
 
 {% block main %}
-<div>
-    <h2>Boje</h2>
-    <div class="options">
-        <a href="{{ BASE }}admin/colors/add">Dodaj novu boju</a>
+<h2 class="text-center page-title dashboard-title">Dashboard</h2>
+<div class="row">
+    <div class="col-lg-3 col-md-12 col-sm-12">
+        <div class="list-group">
+            <a href="{{ BASE }}admin/categories" class="list-group-item list-group-item-action">Kategorije</a>
+            <a href="{{ BASE }}admin/brands" class="list-group-item list-group-item-action">Brendovi</a>
+            <a href="{{ BASE }}admin/products" class="list-group-item list-group-item-action">Proizvodi</a>
+            <a href="{{ BASE }}admin/colors" class="list-group-item list-group-item-action active">Boje</a>
+            <a href="{{ BASE }}admin/sizes" class="list-group-item list-group-item-action">Velicine</a>
+        </div>
     </div>
-    <br />
-    <div class="colors table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Boja</th>
-                    <th>Opcija</th>                
-                </tr>
-            </thead>
 
-            <tbody>
-                {% for color in colors %}
-                <tr>
-                    <td>{{ color.color_id }}</td>
-                    <td>{{ color.name }}</td>
-                    <td><a href="{{ BASE }}admin/colors/edit/{{ color.color_id }}">Izmeni</a> / <a href="{{ BASE }}admin/colors/delete/{{ color.color_id }}">Obrisi</a></td>
-                </tr>
-                {% endfor %}                
-            </tbody>
-        </table>
+    <div class="col-lg-9 col-md-12 col-sm-12 text-center">
+        <div class="colors table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Boja</th>
+                        <th>Opcija</th>                
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    {% for color in colors %}
+                    <tr>
+                        <td>{{ color.color_id }}</td>
+                        <td>{{ color.name }}</td>
+                        <td><a href="{{ BASE }}admin/colors/edit/{{ color.color_id }}">Izmeni</a> / <a href="{{ BASE }}admin/colors/delete/{{ color.color_id }}">Obrisi</a></td>
+                    </tr>
+                    {% endfor %}  
+                    <tr>
+                            <td colspan="4"><a href="{{ BASE }}admin/colors/add">Dodaj novu boju</a></td>
+                        </tr>               
+                </tbody>
+            </table>
+        </div>                     
     </div>
-</div>
+</div>    
 {% endblock %}

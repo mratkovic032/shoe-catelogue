@@ -46,7 +46,27 @@
             $material = filter_input(INPUT_POST, 'material', FILTER_SANITIZE_STRING);    
             $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT);
             $brand = filter_input(INPUT_POST, 'brand', FILTER_SANITIZE_NUMBER_INT);  
-            $admin = $this->getSession()->get('admin_id'); 
+            $admin = $this->getSession()->get('admin_id');
+
+            if (!\preg_match('/^[A-Z][a-z]{2,}/', $title)) {
+                $this->set('message', 'Doslo je do greske: Naziv modela mora da pocinje velikim slovom i da sadrzi minimalno tri karaktera.');
+                return;
+            }
+
+            if (!\preg_match('/.*[^\s]{7,}.*/', $description)) {
+                $this->set('message', 'Doslo je do greske: Opis mora sadrzati minimalno sedam karaktera.');
+                return;
+            }
+ 
+            if (!\preg_match('/^[A-Z][a-z]{2,}/', $material)) {
+                $this->set('message', 'Doslo je do greske: Naziv materijala mora da pocinje velikim slovom i da sadrzi minimalno tri karaktera.');
+                return;
+            }
+            
+            if ($price < 0) {
+                $this->set('message', 'Doslo je do greske: Cena ne moze biti negativna vrednost.');
+                return;
+            }
 
             $productModel = new ProductModel($this->getDatabaseConnection());
             $productId = $productModel->add([ 
@@ -96,7 +116,27 @@
             $price = sprintf("%.2f", filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION));
             $material = filter_input(INPUT_POST, 'material', FILTER_SANITIZE_STRING);    
             $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT); 
-            $brand = filter_input(INPUT_POST, 'brand', FILTER_SANITIZE_NUMBER_INT);  
+            $brand = filter_input(INPUT_POST, 'brand', FILTER_SANITIZE_NUMBER_INT); 
+            
+            if (!\preg_match('/^[A-Z][a-z]{2,}/', $title)) {
+                $this->set('message', 'Doslo je do greske: Naziv modela mora da pocinje velikim slovom i da sadrzi minimalno tri karaktera.');
+                return;
+            }
+
+            if (!\preg_match('/.*[^\s]{7,}.*/', $description)) {
+                $this->set('message', 'Doslo je do greske: Opis mora sadrzati minimalno sedam karaktera.');
+                return;
+            }
+ 
+            if (!\preg_match('/^[A-Z][a-z]{2,}/', $material)) {
+                $this->set('message', 'Doslo je do greske: Naziv materijala mora da pocinje velikim slovom i da sadrzi minimalno tri karaktera.');
+                return;
+            }
+            
+            if ($price <= 0) {
+                $this->set('message', 'Doslo je do greske: Cena ne moze biti negativna vrednost.');
+                return;
+            }
 
             $productModel->editById($productId, [
                 'title'          => $title,  
@@ -144,6 +184,10 @@
             $quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_NUMBER_INT);
             $productId = filter_input(INPUT_POST, 'product_id', FILTER_SANITIZE_NUMBER_INT);
 
+            if ($quantity <= 0) {
+                $this->set('message', 'Doslo je do greske: Kolicina ne moze biti jednaka ili manja nuli.');
+                return;
+            } 
 
             $productVersionModel = new ProductVersionModel($this->getDatabaseConnection());
             $productVersionId = $productVersionModel->add([ 
@@ -186,6 +230,11 @@
             $color = filter_input(INPUT_POST, 'color', FILTER_SANITIZE_NUMBER_INT);
             $size = filter_input(INPUT_POST, 'size', FILTER_SANITIZE_NUMBER_INT);            
             $quantity = filter_input(INPUT_POST, 'quantity', FILTER_SANITIZE_NUMBER_INT);
+
+            if ($quantity <= 0) {
+                $this->set('message', 'Doslo je do greske: Kolicina ne moze biti jednaka ili manja nuli.');
+                return;
+            } 
                 
             $productVersionModel = new ProductVersionModel($this->getDatabaseConnection());
             $productVersionModel->editById($productVersionId, [

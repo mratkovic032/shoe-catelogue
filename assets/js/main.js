@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    
     $('[data-toggle="tooltip"]').tooltip();
-    // $("#carouselInner div:first").addClass("active");        
+
+    $(".card").click(function() {
+        window.location = $(this).find("a").attr("href"); 
+        return false;
+    });    
 });

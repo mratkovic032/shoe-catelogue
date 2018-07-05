@@ -6,25 +6,21 @@ Dashboard
 
 {% block main %}
 {% spaceless %}
-<h2>Dashboard</h2>
-<div>
-    <ul>        
-        <li>
-            <a href="{{ BASE }}admin/categories">Kategorije</a>
-        </li>
-        <li>
-            <a href="{{ BASE }}admin/brands">Brendovi</a>
-        </li>
-        <li>
-            <a href="{{ BASE }}admin/products">Proizvodi</a>
-        </li>
-        <li>
-            <a href="{{ BASE }}admin/colors">Boje</a>
-        </li>
-        <li>
-            <a href="{{ BASE }}admin/sizes">Velicine</a>
-        </li>
-    </ul>
+<h2 class="text-center page-title dashboard-title">Dashboard</h2>
+<div class="row">
+    <div class="col-3">
+        <div class="list-group">
+            <a href="{{ BASE }}admin/categories" class="list-group-item list-group-item-action">Kategorije</a>
+            <a href="{{ BASE }}admin/brands" class="list-group-item list-group-item-action">Brendovi</a>
+            <a href="{{ BASE }}admin/products" class="list-group-item list-group-item-action">Proizvodi</a>
+            <a href="{{ BASE }}admin/colors" class="list-group-item list-group-item-action">Boje</a>
+            <a href="{{ BASE }}admin/sizes" class="list-group-item list-group-item-action">Velicine</a>
+        </div>
+    </div>
+
+    <div class="col-9 text-center">
+        Kliknite na neku od ponudjenih opcija kako biste poceli da uredjujete sardzaj...
+    </div>
 </div>
 {% endspaceless %}
 {% endblock %}

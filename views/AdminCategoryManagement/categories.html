@@ -5,34 +5,45 @@ Dashboard - Kategorije
 {% endblock %}
 
 {% block main %}
-<div>
-    <h2>Kategorije</h2>
-    <div class="options">
-        <a href="{{ BASE }}admin/categories/add">Dodaj novu kategoriju</a>
+<h2 class="text-center page-title dashboard-title">Dashboard</h2>
+<div class="row">
+    <div class="col-lg-3 col-md-12 col-sm-12">
+        <div class="list-group">
+            <a href="{{ BASE }}admin/categories" class="list-group-item list-group-item-action active">Kategorije</a>
+            <a href="{{ BASE }}admin/brands" class="list-group-item list-group-item-action">Brendovi</a>
+            <a href="{{ BASE }}admin/products" class="list-group-item list-group-item-action">Proizvodi</a>
+            <a href="{{ BASE }}admin/colors" class="list-group-item list-group-item-action">Boje</a>
+            <a href="{{ BASE }}admin/sizes" class="list-group-item list-group-item-action">Velicine</a>
+        </div>
     </div>
-    <br />
-    <div class="categories table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Naziv</th>
-                    <th>Kreirana</th>   
-                    <th>Opcija</th>                 
-                </tr>
-            </thead>
 
-            <tbody>
-                {% for category in categories %}
-                <tr>
-                    <td>{{ category.category_id }}</td>
-                    <td>{{ category.created_at }}</td>
-                    <td>{{ category.name|escape }}</td>
-                    <td><a href="{{ BASE }}admin/categories/edit/{{ category.category_id }}">Izmeni</a> / <a href="{{ BASE }}admin/categories/delete/{{ category.category_id }}">Obrisi</a></td>
-                </tr>
-                {% endfor %}                
-            </tbody>
-        </table>
+    <div class="col-lg-9 col-md-12 col-sm-12 text-center">                
+        <div class="categories table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Naziv</th>
+                        <th>Kreirana</th>   
+                        <th>Opcija</th>                 
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>{{ category.category_id }}</td>
+                        <td>{{ category.created_at }}</td>
+                        <td>{{ category.name|escape }}</td>
+                        <td><a href="{{ BASE }}admin/categories/edit/{{ category.category_id }}">Izmeni</a> / <a href="{{ BASE }}admin/categories/delete/{{ category.category_id }}">Obrisi</a></td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="4"><a href="{{ BASE }}admin/categories/add">Dodaj novu kategoriju</a></td>
+                    </tr>                
+                </tbody>
+            </table>
+        </div>             
     </div>
 </div>
 {% endblock %}

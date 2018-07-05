@@ -28,6 +28,11 @@
 
             $size = filter_input(INPUT_POST, 'size', FILTER_SANITIZE_NUMBER_INT);
 
+            if ($size < 16 || $size > 55) {
+                $this->set('message', 'Doslo je do greske: Velicina mora biti vrednost izmedju 16 i 55.');
+                return;
+            }
+
             $sizeModel->editById($sizeId, [
                 'value' => $size
             ]);
@@ -41,6 +46,11 @@
 
         public function postAdd() {
             $size = filter_input(INPUT_POST, 'size', FILTER_SANITIZE_NUMBER_INT);
+
+            if ($size < 16 || $size > 55) {
+                $this->set('message', 'Doslo je do greske: Velicina mora biti vrednost izmedju 16 i 55.');
+                return;
+            }
 
             $sizeModel = new SizeModel($this->getDatabaseConnection());
             $sizeId = $sizeModel->add([ 

@@ -1,11 +1,12 @@
 {% extends "_global/index.html" %}
 
 {% block main %}
+<h2 class="text-center page-title">Kategorije</h2><br />
 {% spaceless %}
 <!-- <p>{{ sessionData }}</p> -->
-<div class="row">        
+<div class="row d-flex justify-content-around">        
     {% for category in categories %}
-        <div class="card list-cards bg-transparent col-12 col-sm-6 col-md-4 col-lg-3 text-center">
+        <div class="card list-cards bg-transparent col-12 col-sm-6 col-md-6 col-lg-3 text-center">
             <img class="card-img-top" src="{{ BASE }}assets/img/category_banner/{{ category.path }}" alt="Card image">
             <div class="card-body">
                 <h5 class="card-title">
@@ -14,6 +15,22 @@
             </div>
         </div>
     {% endfor %}
+</div>
+<h2 class="text-center page-title most-viewed">Najgledanije</h2>
+<div class="row">
+    {% for product in products %}
+        <div class="card card-product bg-transparent col-12 col-sm-6 col-md-6 col-lg-3">
+            <img class="card-img-top" src="{{ BASE }}assets/uploads/{{ product.path }}" alt="Slika - {{ product.title }}">
+            <span class="badge">{{ product.views }} pregleda</span>
+            <div class="card-body">
+                <img class="logo_small" src="{{ BASE }}assets/img/logo/{{ product.path_small }}" alt="Brand logo">
+                <h5 class="card-title">
+                    <a class="products-title" href="{{ BASE }}product/{{ product.product_id }}">{{ product.title|escape }}</a>                    
+                </h5>
+                <label>{{ product.price }} din.</label>
+            </div>
+        </div>   
+    {% endfor %} 
 </div>
 {% endspaceless %}
 {% endblock %}

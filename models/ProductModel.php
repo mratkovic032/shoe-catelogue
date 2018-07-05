@@ -35,7 +35,7 @@
         }
 
         public function getAllByKeyword(string $keywords): array {
-            $sql = 'SELECT * FROM product WHERE product.title LIKE ? OR product.description LIKE ?;';
+            $sql = 'SELECT product.*, brand.path_small AS "logo_path" FROM product INNER JOIN brand ON product.brand_id = brand.brand_id WHERE product.title LIKE ? OR product.description LIKE ?;';
 
             $keywords = '%' . $keywords . '%';
 
@@ -115,4 +115,18 @@
             }
             return $product; 
         } 
+
+        public function getMostViewed(): array {
+            $sql = 'SELECT COUNT(product_view.product_view_id) AS "views", product.*, brand.name AS "brand", brand.path_small, category.name AS "category", admin.username AS "admin" FROM 
+                    ((brand INNER JOIN (product INNER JOIN category ON product.category_id = category.category_id) ON brand.brand_id = product.brand_id) 
+                    INNER JOIN admin ON product.admin_id = admin.admin_id) INNER JOIN product_view ON product.product_id = product_view.product_id
+                    GROUP BY product.product_id ORDER BY views DESC LIMIT 4';
+            $prep = $this->getConnection()->prepare($sql);            
+            $res = $prep->execute();            
+            $products = [];
+            if ($res) {
+                $products = $prep->fetchAll(\PDO::FETCH_OBJ);
+            }
+            return $products; 
+        }
     }

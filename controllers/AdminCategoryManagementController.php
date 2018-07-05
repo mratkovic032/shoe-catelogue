@@ -33,6 +33,11 @@
 
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 
+            if ($name === "") {
+                $this->set('message', 'Doslo je do greske: Morate popuniti polje.');
+                return;
+            }
+
             $categoryModel->editById($categoryId, [
                 'name' => $name
             ]);
@@ -46,6 +51,11 @@
 
         public function postAdd() {
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+
+            if ($name === "") {
+                $this->set('message', 'Doslo je do greske: Morate popuniti polje.');
+                return;
+            }
 
             $categoryModel = new CategoryModel($this->getDatabaseConnection());
             $categoryId = $categoryModel->add([ 

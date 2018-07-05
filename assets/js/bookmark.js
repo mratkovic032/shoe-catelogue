@@ -7,13 +7,12 @@ function getBookmarks() {
 }
 
 function addBookmark(productId) {
-    $('#success-wishlist').addClass("show");    
-    $('#wishlist').addClass("swing");
+    $('#wishlist').addClass('swing');
 
     fetch(BASE + 'api/bookmarks/add/' + productId, { credentials: 'include' })
         .then(result => result.json())
         .then(data => {
-            if (data.error === 0) {
+            if (data.error === 0) {                
                 getBookmarks();
             }
         });

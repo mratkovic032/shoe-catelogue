@@ -2,6 +2,8 @@
     namespace App\Controllers;
 
     use App\Models\CategoryModel;
+    use App\Models\ProductModel;
+    use App\Models\ImageModel;
     use App\Core\Controller;
     use App\Validators\StringValidator;
     use App\Models\AdminModel;
@@ -20,6 +22,19 @@
             $this->getSession()->put('counter', $newValue);
             
             $this->set('sessionData', $newValue);
+
+            $productModel = new ProductModel($this->getDatabaseConnection());
+            $products = $productModel->getMostViewed();
+
+            $imageModel = new ImageModel($this->getDatabaseConnection());
+            foreach ($products as $product) {                
+                $image = $imageModel->getImageByProductId($product->product_id);
+                if ($image) {
+                    $product->path = $image->path;
+                }                
+            }
+
+            $this->set('products', $products);
         }    
         
         public function getRegister() {

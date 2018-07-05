@@ -28,6 +28,11 @@
 
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 
+            if ($name === "") {
+                $this->set('message', 'Doslo je do greske: Morate popuniti polje.');
+                return;
+            }
+
             $colorModel->editById($colorId, [
                 'name' => $name
             ]);
@@ -41,6 +46,11 @@
 
         public function postAdd() {
             $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+
+            if ($name === "") {
+                $this->set('message', 'Doslo je do greske: Morate popuniti polje.');
+                return;
+            }
 
             $colorModel = new ColorModel($this->getDatabaseConnection());
             $colorId = $colorModel->add([ 
